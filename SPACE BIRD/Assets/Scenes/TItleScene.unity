@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 696879652}
   - component: {fileID: 696879651}
   - component: {fileID: 696879650}
+  - component: {fileID: 696879653}
   m_Layer: 5
   m_Name: HiscoreButton
   m_TagString: Untagged
@@ -501,7 +502,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 696879651}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 696879653}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &696879651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +553,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696879648}
   m_CullTransparentMesh: 1
+--- !u!114 &696879653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696879648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54795b5ef527c7e42b121c127e74f50d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: Hiscore
 --- !u!1 &705631480
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +664,8 @@ GameObject:
   - component: {fileID: 877071682}
   - component: {fileID: 877071684}
   - component: {fileID: 877071683}
+  - component: {fileID: 877071685}
+  - component: {fileID: 877071686}
   m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
@@ -706,6 +734,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877071681}
   m_CullTransparentMesh: 1
+--- !u!114 &877071685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877071681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5dd19bd453e394ca540a1806acfb74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &877071686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877071681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54795b5ef527c7e42b121c127e74f50d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: 
 --- !u!1 &1005875783
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,6 +771,7 @@ GameObject:
   - component: {fileID: 1005875787}
   - component: {fileID: 1005875786}
   - component: {fileID: 1005875785}
+  - component: {fileID: 1005875788}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -788,7 +842,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1005875786}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1005875788}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1005875786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,6 +893,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005875783}
   m_CullTransparentMesh: 1
+--- !u!114 &1005875788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005875783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54795b5ef527c7e42b121c127e74f50d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: Movie_st1
 --- !u!1 &1108090438
 GameObject:
   m_ObjectHideFlags: 0

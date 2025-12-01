@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TItleScene.unity
     guid: f82fba3dc000d654ea8e94e5518e15da
+  - enabled: 1
+    path: Assets/Scenes/Hiscore.unity
+    guid: d06808e67b33ed346a8640c96bec823a
+  - enabled: 1
+    path: Assets/Scenes/Movie_st1.unity
+    guid: e596be8924d63c84e8f7b235cdcd9cb0
+  - enabled: 1
+    path: Assets/Scenes/Stage1.unity
+    guid: dac1b8a042aa8bf42bc19e1deb45bd4f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
