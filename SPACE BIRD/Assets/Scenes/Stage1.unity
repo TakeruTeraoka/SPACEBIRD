@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e2639d36ba2e842b3502e0e59e9ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.01
+  scrollSpeed: 0.03
 --- !u!1 &1236427278
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e2639d36ba2e842b3502e0e59e9ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.001
+  scrollSpeed: -0.02
 --- !u!1001 &1637959636
 PrefabInstance:
   m_ObjectHideFlags: 0
