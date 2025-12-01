@@ -582,16 +582,12 @@ PrefabInstance:
       value: Tree
       objectReference: {fileID: 0}
     - target: {fileID: 1825034220998927249, guid: b4689b733138ba845aa1785d18955898, type: 3}
-      propertyPath: scrollSpeed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1825034220998927249, guid: b4689b733138ba845aa1785d18955898, type: 3}
       propertyPath: stageObject
       value: 
       objectReference: {fileID: 647007626}
     - target: {fileID: 6678151121967261480, guid: b4689b733138ba845aa1785d18955898, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.053
+      value: 0.1106
       objectReference: {fileID: 0}
     - target: {fileID: 6678151121967261480, guid: b4689b733138ba845aa1785d18955898, type: 3}
       propertyPath: m_LocalPosition.y
