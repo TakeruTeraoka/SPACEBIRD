@@ -14,6 +14,8 @@ public class NearBackgroundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gameState != "playing") return;
+
         transform.Translate(scrollSpeed, 0, 0);
 
         if (this.transform.position.x >= cloneStartPoint && !isClone)
