@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.gameState != "playing") return;
 
         isMoving = true;
+        PlayerShoot.isPlayerTouch = true;
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = mouseWorldPosition;
@@ -83,8 +84,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMouseUp()
     {
-        if (GameManager.gameState != "playing") return;
-
+        PlayerShoot.isPlayerTouch = false;
         isMoving = false;
     }
 

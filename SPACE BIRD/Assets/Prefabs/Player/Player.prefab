@@ -204,6 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751296222808270465}
+  - component: {fileID: 3725644853667205741}
   m_Layer: 0
   m_Name: PlayerBulletPoint
   m_TagString: Untagged
@@ -226,3 +227,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6772784761718805987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3725644853667205741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5271210347286713365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06eced96aac441e498276a4655fcbb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  span: 1
+  playerBullet: {fileID: 0}
