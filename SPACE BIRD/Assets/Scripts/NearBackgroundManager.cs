@@ -21,6 +21,7 @@ public class NearBackgroundManager : MonoBehaviour
         if (this.transform.position.x >= cloneStartPoint && !isClone)
         {
             GameObject cloneObject = Instantiate(nearObject, new Vector3(clonePoint, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+            cloneObject.name = nearObject.name;
             cloneObject.transform.parent = stageObject.transform;
             isClone = true;
         }
