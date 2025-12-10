@@ -1,11 +1,18 @@
 using UnityEngine;
 
-public class Boss1 : MonoBehaviour
+public class Boss1 : EnemyBase
 {
     public float span = 2.0f; //発射間隔
 
+    private float speed = 1;    //アニメーションの再生速度
     private float delta = 0;    //加算用変数
     private bool isSpecial = false; //敵を飛ばしたかどうかを管理するフラグ
+
+    private void Start()
+    {
+        hp = 100;
+        speed = this.GetComponent<Animator>().speed;
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,8 +25,8 @@ public class Boss1 : MonoBehaviour
             return;
         }
 
-        //アニメーションの再生速度を1（通常）に戻す
-        this.GetComponent<Animator>().speed = 1;
+        //元の速度に戻す
+        this.GetComponent<Animator>().speed = speed;
 
         //一定時間に達した場合
         if (delta >= span)

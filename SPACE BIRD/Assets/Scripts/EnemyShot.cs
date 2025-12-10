@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy1 : MonoBehaviour
+public class EnemyShot : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -11,12 +11,6 @@ public class Enemy1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState != "playing")
-        {
-            this.GetComponent<Animator>().speed = 0;
-            return;
-        }
-
-        this.GetComponent<Animator>().speed = 1;
+        
     }
 }
