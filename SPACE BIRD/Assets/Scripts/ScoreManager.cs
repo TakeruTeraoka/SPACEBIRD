@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static int totalScore = 0;
-    public static int addScore = 0;
+    public static int totalScore = 0;   //合計スコア
+    public static int addScore = 0;     //加算するスコア
     private int score = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
