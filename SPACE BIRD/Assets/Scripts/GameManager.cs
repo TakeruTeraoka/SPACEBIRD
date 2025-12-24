@@ -205,8 +205,10 @@ public class GameManager : MonoBehaviour
                 chargeMeters[i].gameObject.SetActive(true);
             }
 
-            if (isChargeMax && Input.GetButtonDown("Special"))
+            if (isChargeMax && PlayerController.isSpecial)
             {
+                PlayerController.isSpecial = false;
+                isChargeMax = false;
                 charge = 0;
                 foreach (Transform meter in chargeMeters)
                 {
@@ -216,7 +218,6 @@ public class GameManager : MonoBehaviour
                 {
                     animator.Play("Stop");
                 }
-                isChargeMax = false;
             }
         }
     }

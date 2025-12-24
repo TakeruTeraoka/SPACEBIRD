@@ -1575,6 +1575,22 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2495944980263248268, guid: 39ff6c7c0d64c6240b37dae3e194f68e, type: 3}
+      propertyPath: m_Radius
+      value: 0.99187315
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495944980263248268, guid: 39ff6c7c0d64c6240b37dae3e194f68e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495944980263248268, guid: 39ff6c7c0d64c6240b37dae3e194f68e, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.40634453
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495944980263248268, guid: 39ff6c7c0d64c6240b37dae3e194f68e, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.07314205
+      objectReference: {fileID: 0}
     - target: {fileID: 3725644853667205741, guid: 39ff6c7c0d64c6240b37dae3e194f68e, type: 3}
       propertyPath: span
       value: 0.2

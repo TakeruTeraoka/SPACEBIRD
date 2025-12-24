@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static bool isSpecial = false;
+
     public float baseSpeed = 3.0f;
     public float slowSpeed = 1.0f;
     public float UpLimit;
@@ -15,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private float axisV;
     private bool isSlow = false;
     private bool isMoving = false;
-    private bool isSpecial = false;
     private Animator animator;
     private int clickCnt = 0;
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         speed = baseSpeed;
+        isSpecial = false;
     }
 
     // Update is called once per frame
@@ -57,7 +59,10 @@ public class PlayerController : MonoBehaviour
             isSlow = false;
         }
 
-        isSpecial = Input.GetButtonDown("Special");
+        if (Input.GetButtonDown("Special") && GameManager.isChargeMax)
+        {
+            isSpecial = true;
+        }
     }
 
     void FixedUpdate()
@@ -100,8 +105,14 @@ public class PlayerController : MonoBehaviour
     void DoubleClick()
     {
         if (clickCnt != 2) { clickCnt = 0; return; }
-        else { clickCnt = 0; }
+        else
+        {
+            clickCnt = 0;
+        }
 
-        isSpecial = true;
+        if (GameManager.isChargeMax)
+        {
+            isSpecial = true;
+        }
     }
 }
