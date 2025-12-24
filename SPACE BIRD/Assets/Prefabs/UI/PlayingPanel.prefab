@@ -475,7 +475,6 @@ GameObject:
   - component: {fileID: 5590037965510719843}
   - component: {fileID: 8464032471605508337}
   - component: {fileID: 1640868479236233002}
-  - component: {fileID: 7779451392431352109}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -544,18 +543,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 000000
---- !u!114 &7779451392431352109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3722544430557657725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74e3336a941e4042b066bfee5a6f391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4899761629618395119
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +554,6 @@ GameObject:
   - component: {fileID: 2566006886837705844}
   - component: {fileID: 3275281823663310873}
   - component: {fileID: 7434893727805781401}
-  - component: {fileID: 2902365319553724144}
   m_Layer: 5
   m_Name: SpecialPanel
   m_TagString: Untagged
@@ -638,18 +624,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2902365319553724144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4899761629618395119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b04747f2eaccf47befe500cf7d6564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5431349645588513799
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +922,6 @@ GameObject:
   - component: {fileID: 2747427558277855115}
   - component: {fileID: 5076816857205566253}
   - component: {fileID: 3739655853129362871}
-  - component: {fileID: 3944583703914301059}
   m_Layer: 5
   m_Name: ZankiPanel
   m_TagString: Untagged
@@ -1016,18 +989,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3944583703914301059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7542652247684893600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1737a0586f137b74493f62515e6c4095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8012818691529521191
 GameObject:
   m_ObjectHideFlags: 0

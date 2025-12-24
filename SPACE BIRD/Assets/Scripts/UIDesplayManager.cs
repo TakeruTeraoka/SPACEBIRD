@@ -11,7 +11,7 @@ public class UIDesplayManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player")
         {
             playingPanel.SetActive(false);
         }
@@ -19,7 +19,7 @@ public class UIDesplayManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player")
         {
             playingPanel.SetActive(true);
         }

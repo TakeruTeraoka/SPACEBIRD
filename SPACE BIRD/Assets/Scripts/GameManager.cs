@@ -4,6 +4,15 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static string gameState = "";
+    public static int totalScore = 0;   //合計スコア
+    public static int addScore = 0;     //加算するスコア
+    public static int zanki = 5;
+    public static bool isChargeMax = false;  //ボムチャージ完了フラグ
+    public static int charge = 0;
+    public GameObject scoreText;
+    public GameObject zankiText;
+    public float chargeSpan = 1;
+    public GameObject specialPanel;
     public GameObject pausedPanel;
     public Button pauseButton;
     public Button continueButton;
@@ -12,18 +21,35 @@ public class GameManager : MonoBehaviour
     public GameObject arrow_L;
     public GameObject arrow_R;
 
+    private int score = 0;
     private ChangeScene changeScene;
     private bool isMove = false;
     private string selectButton = "continue";
+    private Transform[] chargeMeters = new Transform[6];
+    private Animator[] animators = new Animator[6];
+    private float delta = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Application.targetFrameRate = 59;
         changeScene = this.GetComponent<ChangeScene>();
+        chargeMeters = specialPanel.GetComponentsInChildren<Transform>();
+        animators = specialPanel.GetComponentsInChildren<Animator>();
+        foreach (Transform meter in chargeMeters)
+        {
+            meter.gameObject.SetActive(false);
+        }
         gameState = "playing";
         InitPosition();
         pausedPanel.SetActive(false);
+        totalScore = 0;
+        addScore = 0;
+        scoreText.GetComponent<Text>().text = score.ToString("000000");
+        zanki = 5;
+        zankiText.GetComponent<Text>().text = zanki.ToString("00");
+        charge = 0;
+        isChargeMax = false;
     }
 
     private void Update()
@@ -36,6 +62,11 @@ public class GameManager : MonoBehaviour
 
         if (gameState == "paused")
         {
+            foreach (Animator animator in animators)
+            {
+                animator.speed = 0;
+            }
+
             if (Input.GetAxisRaw("Vertical") != 0 && !isMove)
             {
                 isMove = true;
@@ -129,6 +160,63 @@ public class GameManager : MonoBehaviour
                         changeScene.Load();
                         break;
                 }
+            }
+        }
+        else
+        {
+            foreach (Animator animator in animators)
+            {
+                animator.speed = 1;
+            }
+
+            if (addScore != 0)
+            {
+                score += addScore;
+                totalScore += addScore;
+                addScore = 0;
+                if (score > 999999)
+                {
+                    zanki++;
+                    score = 0;
+                }
+                scoreText.GetComponent<Text>().text = score.ToString("000000");
+            }
+
+            if (charge < 6)
+            {
+                delta += Time.deltaTime;
+                if (delta >= chargeSpan)
+                {
+                    delta = 0;
+                    charge++;
+                }
+            }
+            else
+            {
+                isChargeMax = true;
+                foreach (Animator animator in animators)
+                {
+                    animator.Play("Blick");
+                }
+            }
+
+            for (int i = 0; i <= charge; i++)
+            {
+                chargeMeters[i].gameObject.SetActive(true);
+            }
+
+            if (isChargeMax && Input.GetButtonDown("Special"))
+            {
+                charge = 0;
+                foreach (Transform meter in chargeMeters)
+                {
+                    meter.gameObject.SetActive(false);
+                }
+                foreach (Animator animator in animators)
+                {
+                    animator.Play("Stop");
+                }
+                isChargeMax = false;
             }
         }
     }
