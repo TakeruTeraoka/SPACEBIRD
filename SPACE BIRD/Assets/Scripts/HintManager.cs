@@ -4,7 +4,15 @@ public class HintManager : MonoBehaviour
 {
     public static string input = "Touch";
 
-    // Update is called once per frame
+    public GameObject keyboardGuide;
+    public GameObject touchGuide;
+    public GameObject gamePadGuide;
+
+    void Start()
+    {
+        SwitchGuide();
+    }
+
     void Update()
     {
         if (Input.anyKey && !Input.GetMouseButton(0) && !Input.GetMouseButton(1) && !Input.GetMouseButton(2) && !Input.GetButton("AnyButton"))
@@ -20,6 +28,32 @@ public class HintManager : MonoBehaviour
             input = "GamePad";
         }
 
+        SwitchGuide();
+
         Debug.Log("Input:" + input);
+    }
+
+    private void SwitchGuide()
+    {
+        switch (input)
+        {
+            case "Keyboard":
+                keyboardGuide.SetActive(true);
+                touchGuide.SetActive(false);
+                gamePadGuide.SetActive(false);
+                break;
+
+            case "Touch":
+                keyboardGuide.SetActive(false);
+                touchGuide.SetActive(true);
+                gamePadGuide.SetActive(false);
+                break;
+
+            case "GamePad":
+                keyboardGuide.SetActive(false);
+                touchGuide.SetActive(false);
+                gamePadGuide.SetActive(true);
+                break;
+        }
     }
 }

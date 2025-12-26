@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float chargeSpan = 1;
     public GameObject specialPanel;
     public GameObject pausedPanel;
+    public GameObject guidePanel;
     public Button pauseButton;
     public Button continueButton;
     public Button restartButton;
@@ -228,12 +229,14 @@ public class GameManager : MonoBehaviour
         {
             gameState = "paused";
             pausedPanel.SetActive(true);
+            guidePanel.SetActive(false);
             pauseButton.gameObject.SetActive(false);
         }
         else if (gameState == "paused")
         {
             gameState = "playing";
             pausedPanel.SetActive(false);
+            guidePanel.SetActive(true);
             pauseButton.gameObject.SetActive(true);
         }
     }
