@@ -36,8 +36,6 @@ public class EnemyBase : MonoBehaviour
         {
             hp--;   //HPÇ1å∏ÇÁÇ∑
 
-            Debug.Log("åªç›ÇÃHPÅF" + hp);
-
             //HPÇ™ÇOà»â∫Ç…Ç»Ç¡ÇΩèÍçá
             if (hp <= 0)
             {
