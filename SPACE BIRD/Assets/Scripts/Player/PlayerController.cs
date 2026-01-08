@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static string playerState = "alive";
     public static bool isSpecial = false;
 
     public float baseSpeed = 3.0f;
@@ -10,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public float DownLimit;
     public float LeftLimit;
     public float RightLimit;
-
     private float speed;
     private Rigidbody2D rbody;
     private float axisH;
@@ -32,9 +32,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float posX = Mathf.Clamp(transform.position.x, LeftLimit, RightLimit);
-        float posY = Mathf.Clamp(transform.position.y, DownLimit, UpLimit);
-        transform.position = new Vector2(posX, posY);
         animator.speed = 1;
 
         if (GameManager.gameState != "playing")
@@ -43,6 +40,12 @@ public class PlayerController : MonoBehaviour
             animator.speed = 0;
             return;
         }
+
+        if (playerState != "alive") return;
+
+        float posX = Mathf.Clamp(transform.position.x, LeftLimit, RightLimit);
+        float posY = Mathf.Clamp(transform.position.y, DownLimit, UpLimit);
+        transform.position = new Vector2(posX, posY);
 
         if (!isMoving)
         {
@@ -67,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager.gameState != "playing") return;
+        if (GameManager.gameState != "playing" || playerState != "alive") return;
 
         if (!isMoving)
         {
@@ -76,9 +79,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        {
+            GameManager.addZanki = -1;
+            rbody.linearVelocity = Vector2.zero;
+            playerState = "miss";
+            animator.Play("Miss");
+        }
+    }
+
     void OnMouseDrag()
     {
-        if (GameManager.gameState != "playing") return;
+        if (GameManager.gameState != "playing" || playerState != "alive") return;
 
         isMoving = true;
         PlayerShoot.isPlayerTouch = true;
@@ -96,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (GameManager.gameState != "playing") return;
+        if (GameManager.gameState != "playing" || playerState != "alive") return;
 
         clickCnt++;
         Invoke("DoubleClick", 0.3f);

@@ -6,12 +6,14 @@ public class GameManager : MonoBehaviour
     public static string gameState = "";
     public static int totalScore = 0;   //合計スコア
     public static int addScore = 0;     //加算するスコア
-    public static int zanki = 5;
+    public static int zanki = 5;        //残機
+    public static int addZanki = 0;     //加算する残機（マイナスを含む）
     public static bool isChargeMax = false;  //ボムチャージ完了フラグ
-    public static int charge = 0;
+    public static int charge = 0;   //ボムチャージ
+    public float chargeSpan = 1;    //チャージ間隔
+
     public GameObject scoreText;
     public GameObject zankiText;
-    public float chargeSpan = 1;
     public GameObject specialPanel;
     public GameObject pausedPanel;
     public GameObject guidePanel;
@@ -22,16 +24,16 @@ public class GameManager : MonoBehaviour
     public GameObject arrow_L;
     public GameObject arrow_R;
 
-    private int score = 0;
+    private int score = 0;  //スコア
+    private float delta = 0;    //加算用変数
+    private bool isMove = false;    //カーソル移動フラグ
+    private string selectButton = "continue";   //選択されているボタン
+
     private ChangeScene changeScene;
-    private bool isMove = false;
-    private string selectButton = "continue";
     private Transform[] chargeMeters = new Transform[6];
     private Animator[] animators = new Animator[6];
-    private float delta = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         Application.targetFrameRate = 59;
         changeScene = this.GetComponent<ChangeScene>();
@@ -55,12 +57,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //通常画面からポーズ画面に切り替える
         if (Input.GetButtonDown("Cancel"))
         {
             InitPosition();
             SwitchPanel();
         }
 
+        //ポーズ処理
         if (gameState == "paused")
         {
             foreach (Animator animator in animators)
@@ -163,13 +167,16 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        //通常処理
         else
         {
+            //アニメーション速度を等倍に戻す
             foreach (Animator animator in animators)
             {
                 animator.speed = 1;
             }
 
+            //スコアの増加
             if (addScore != 0)
             {
                 score += addScore;
@@ -183,6 +190,17 @@ public class GameManager : MonoBehaviour
                 scoreText.GetComponent<Text>().text = score.ToString("000000");
             }
 
+
+            //残機の増減
+            if (addZanki != 0)
+            {
+                if (zanki < 99) zanki += addZanki;
+                addZanki = 0;
+
+                zankiText.GetComponent<Text>().text = zanki.ToString("00");
+            }
+
+            //ボムチャージ
             if (charge < 6)
             {
                 delta += Time.deltaTime;
@@ -223,6 +241,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //パネル切替
     public void SwitchPanel()
     {
         if (gameState == "playing")
@@ -241,6 +260,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //カーソルの位置の初期化
     public void InitPosition()
     {
         arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
@@ -252,11 +272,13 @@ public class GameManager : MonoBehaviour
         selectButton = "continue";
     }
 
+    //ゲームを続ける
     public void ContinueGame()
     {
         InitPosition();
     }
 
+    //ゲームをリスタート
     public void RestartGame()
     {
         gameState = "playing";
@@ -269,6 +291,7 @@ public class GameManager : MonoBehaviour
         selectButton = "restart";
     }
 
+    //タイトルに戻る
     public void ReturnTitle()
     {
         gameState = "";
