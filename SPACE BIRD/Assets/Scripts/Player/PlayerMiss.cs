@@ -40,14 +40,21 @@ public class PlayerMiss : MonoBehaviour
             else if (transform.position.x > 6.87f)
             {
                 transform.Translate(-reMoveSpeedX, 0, 0);
+
             }
             else
             {
-                animator.Play("Stop");
+                rbody.linearVelocity = Vector3.zero;
                 PlayerController.playerState = "alive";
                 isFalled = false;
                 isTeleported = false;
+                Invoke("PlayStopAnime", 0.3f);
             }
         }
+    }
+
+    private void PlayStopAnime()
+    {
+        animator.Play("Stop");
     }
 }

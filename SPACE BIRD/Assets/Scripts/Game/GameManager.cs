@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         {
             meter.gameObject.SetActive(false);
         }
+        PlayerController.playerState = "alive";
         gameState = "playing";
         InitPosition();
         pausedPanel.SetActive(false);

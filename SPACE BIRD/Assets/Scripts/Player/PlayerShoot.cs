@@ -32,7 +32,6 @@ public class PlayerShoot : MonoBehaviour
             delta += Time.deltaTime;
             if (delta > span)
             {
-                GameManager.addScore = 1000;
                 delta = 0;
                 GameObject clone = Instantiate(playerBullet, this.transform.position, Quaternion.identity);
                 clone.name = playerBullet.name;
