@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 4280006914371802988}
   - component: {fileID: 180096078379679764}
   - component: {fileID: 5704972090013019357}
+  - component: {fileID: 9202104536451276383}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -255,6 +256,28 @@ MonoBehaviour:
   keyboardGuide: {fileID: 2882162077894669206}
   touchGuide: {fileID: 5315170735004225107}
   gamePadGuide: {fileID: 4721262613670995291}
+--- !u!95 &9202104536451276383
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131245734878982750}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b779f4c3b62386f4e8c98b3081feb507, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1798628812702544895
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +529,6 @@ GameObject:
   - component: {fileID: 6293871332139453826}
   - component: {fileID: 3721044994107317835}
   - component: {fileID: 2187492474009683268}
-  - component: {fileID: 1966845230710331189}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -618,7 +640,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnTitle
+        m_MethodName: SwitchOverToPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -628,31 +650,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1966845230710331189}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1966845230710331189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2320347455166593835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54795b5ef527c7e42b121c127e74f50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: Title
 --- !u!1 &2707752817199593552
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -491.49997, y: -260.30002}
+  m_AnchoredPosition: {x: -491.50003, y: -260.30005}
   m_SizeDelta: {x: -923.42, y: -467.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2369578399972730697
@@ -1400,7 +1397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -491.49997, y: -269.49997}
+  m_AnchoredPosition: {x: -491.50003, y: -269.5}
   m_SizeDelta: {x: -1010.9, y: -558.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4256054211574328069
@@ -1703,7 +1700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -454.20004, y: -269.49997}
+  m_AnchoredPosition: {x: -454.2001, y: -269.5}
   m_SizeDelta: {x: -923.42, y: -558.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5532700088574938806
@@ -2148,7 +2145,6 @@ GameObject:
   - component: {fileID: 3189841471379085277}
   - component: {fileID: 3105595089418406328}
   - component: {fileID: 1155286049994664361}
-  - component: {fileID: 9101567452553900952}
   m_Layer: 5
   m_Name: Name_2
   m_TagString: Untagged
@@ -2257,44 +2253,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3105595089418406328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnTitle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9101567452553900952}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &9101567452553900952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6171696521901004513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54795b5ef527c7e42b121c127e74f50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: Title
+      m_Calls: []
 --- !u!1 &6217927955272072050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,7 +2656,6 @@ GameObject:
   - component: {fileID: 5291744905887190281}
   - component: {fileID: 922270125825676584}
   - component: {fileID: 5556852501756981383}
-  - component: {fileID: 4948682027081740221}
   m_Layer: 5
   m_Name: Name_0
   m_TagString: Untagged
@@ -2806,44 +2764,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 922270125825676584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnTitle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4948682027081740221}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4948682027081740221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7489050857834825341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54795b5ef527c7e42b121c127e74f50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: Title
+      m_Calls: []
 --- !u!1 &7596268955754438726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3090,7 +3011,6 @@ GameObject:
   - component: {fileID: 5550475016248037519}
   - component: {fileID: 3907698395129346464}
   - component: {fileID: 9188289439545461383}
-  - component: {fileID: 2898277772463009177}
   m_Layer: 5
   m_Name: Name_1
   m_TagString: Untagged
@@ -3199,44 +3119,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3907698395129346464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnTitle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2898277772463009177}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2898277772463009177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781232285781256038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54795b5ef527c7e42b121c127e74f50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: Title
+      m_Calls: []
 --- !u!1 &7860284707791635085
 GameObject:
   m_ObjectHideFlags: 0
