@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet") && playerState == "alive")
+        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
         {
             GameManager.addZanki = -1;
             rbody.linearVelocity = Vector2.zero;
