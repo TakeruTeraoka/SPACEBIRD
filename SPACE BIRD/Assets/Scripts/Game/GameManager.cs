@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static string currentStage;
     public static string gameState = "";
     public static int totalScore = 0;   //合計スコア
     public static int addScore = 0;     //加算するスコア
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 59;
+        currentStage = SceneManager.GetActiveScene().name;
         changeScene = this.GetComponent<ChangeScene>();
         chargeMeters = specialPanel.GetComponentsInChildren<Transform>();
         animators = specialPanel.GetComponentsInChildren<Animator>();
@@ -68,6 +71,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(currentStage);
+
         //通常画面からポーズ画面に切り替える
         if (Input.GetButtonDown("Cancel"))
         {
@@ -309,7 +314,7 @@ public class GameManager : MonoBehaviour
         }
         else if (gameState == "gameover")
         {
-            changeScene.SceneName = "Stage1";
+            changeScene.SceneName = currentStage;
             changeScene.Load();
         }
     }
