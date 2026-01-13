@@ -17,11 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject specialPanel;
     public GameObject pausedPanel;
     public GameObject guidePanel;
-    public GameObject playingPanel;
-    public GameObject gameOverPanel;
-    public GameObject stageClearPanel;
-    public GameObject gameOverTitle;
-    public GameObject gameClearTitle;
     public Button pauseButton;
     public Button continueButton;
     public Button restartButton;
@@ -52,10 +47,6 @@ public class GameManager : MonoBehaviour
         gameState = "playing";
         InitPosition();
         pausedPanel.SetActive(false);
-        gameOverPanel.SetActive(false);
-        stageClearPanel.SetActive(false);
-        gameOverTitle.SetActive(false);
-        gameClearTitle.SetActive(false);
         totalScore = 0;
         addScore = 0;
         scoreText.GetComponent<Text>().text = score.ToString("000000");
@@ -177,13 +168,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else if (gameState == "gameover")
-        {
-            foreach (Animator animator in animators)
-            {
-                animator.speed = 0;
-            }
-        }
         //í èÌèàóù
         else
         {
@@ -211,14 +195,9 @@ public class GameManager : MonoBehaviour
             //écã@ÇÃëùå∏
             if (addZanki != 0)
             {
-                if (zanki < 99 && zanki > 0) zanki += addZanki;
-                else if (zanki <= 0)
-                {
-                    gameOverPanel.SetActive(true);
-                    gameOverPanel.GetComponent<Animator>().Play("FadeIn");
-                    gameState = "gameover";
-                }
+                if (zanki < 99) zanki += addZanki;
                 addZanki = 0;
+
                 zankiText.GetComponent<Text>().text = zanki.ToString("00");
             }
 
