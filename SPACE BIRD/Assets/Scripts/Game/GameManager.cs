@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static string gameState = "";
+    public static string currentStage = "";
     public static int totalScore = 0;   //合計スコア
     public static int addScore = 0;     //加算するスコア
     public static int zanki = 5;        //残機
@@ -16,7 +18,9 @@ public class GameManager : MonoBehaviour
     public GameObject zankiText;
     public GameObject specialPanel;
     public GameObject pausedPanel;
+    public GameObject gameOCPanel;
     public GameObject guidePanel;
+    public GameObject gameClearTitle;
     public Button pauseButton;
     public Button continueButton;
     public Button restartButton;
@@ -45,8 +49,11 @@ public class GameManager : MonoBehaviour
         }
         PlayerController.playerState = "alive";
         gameState = "playing";
+        currentStage = SceneManager.GetActiveScene().name;
         InitPosition();
         pausedPanel.SetActive(false);
+        gameOCPanel.SetActive(false);
+        gameClearTitle.SetActive(false);
         totalScore = 0;
         addScore = 0;
         scoreText.GetComponent<Text>().text = score.ToString("000000");
@@ -195,7 +202,12 @@ public class GameManager : MonoBehaviour
             //残機の増減
             if (addZanki != 0)
             {
-                if (zanki < 99) zanki += addZanki;
+                if (zanki < 99 && zanki >= 1) zanki += addZanki;
+                else if (zanki <= 0)
+                {
+                    gameState = "gameover";
+                    SwitchPanel();
+                }
                 addZanki = 0;
 
                 zankiText.GetComponent<Text>().text = zanki.ToString("00");
@@ -259,6 +271,12 @@ public class GameManager : MonoBehaviour
             guidePanel.SetActive(true);
             pauseButton.gameObject.SetActive(true);
         }
+        else if (gameState == "gameover")
+        {
+            gameOCPanel.SetActive(true);
+            guidePanel.SetActive(false);
+            gameOCPanel.GetComponent<Animator>().Play("FadeIn");
+        }
     }
 
     //カーソルの位置の初期化
@@ -303,5 +321,12 @@ public class GameManager : MonoBehaviour
                                                                           exitButton.GetComponent<RectTransform>().localPosition.y,
                                                                           arrow_R.GetComponent<RectTransform>().localPosition.z);
         selectButton = "exit";
+    }
+
+    //現在のステージからコンティニューする
+    public void ContinueCurrentStage()
+    {
+        changeScene.SceneName = currentStage;
+        changeScene.Load();
     }
 }
