@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
         InitPosition();
         pausedPanel.SetActive(false);
         gameOCPanel.SetActive(false);
-        gameClearTitle.SetActive(false);
         totalScore = 0;
         addScore = 0;
         scoreText.GetComponent<Text>().text = score.ToString("000000");
@@ -176,7 +175,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //通常処理
-        else
+        else if (gameState == "playing")
         {
             //アニメーション速度を等倍に戻す
             foreach (Animator animator in animators)
@@ -207,6 +206,10 @@ public class GameManager : MonoBehaviour
                 {
                     gameState = "gameover";
                     SwitchPanel();
+                    foreach (Animator animator in animators)
+                    {
+                        animator.speed = 0;
+                    }
                 }
                 addZanki = 0;
 
