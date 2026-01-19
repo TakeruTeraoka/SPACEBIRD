@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,19 +20,28 @@ public class GameManager : MonoBehaviour
     public GameObject specialPanel;
     public GameObject pausedPanel;
     public GameObject gameOCPanel;
+    public GameObject gameOCEntryPanel;
+    public GameObject gameOCButtonPanel;
     public GameObject guidePanel;
-    public GameObject gameClearTitle;
     public Button pauseButton;
     public Button continueButton;
     public Button restartButton;
     public Button exitButton;
+    public Button gameOCContinueButton;
+    public Button gameOCRestartButton;
+    public Button gameOCExitButton;
     public GameObject arrow_L;
     public GameObject arrow_R;
+    public GameObject gameOCArrow_L;
+    public GameObject gameOCArrow_R;
 
     private int score = 0;  //スコア
     private float delta = 0;    //加算用変数
     private bool isMove = false;    //カーソル移動フラグ
+    private bool isGameOCMove = false;
+    private bool isGameOCButtonSwitched = false;
     private string selectButton = "continue";   //選択されているボタン
+    private string gameOCSelectButton = "continue";
 
     private ChangeScene changeScene;
     private Transform[] chargeMeters = new Transform[6];
@@ -51,8 +61,10 @@ public class GameManager : MonoBehaviour
         gameState = "playing";
         currentStage = SceneManager.GetActiveScene().name;
         InitPosition();
+        InitGameOCPosition();
         pausedPanel.SetActive(false);
         gameOCPanel.SetActive(false);
+        isGameOCButtonSwitched = false;
         totalScore = 0;
         addScore = 0;
         scoreText.GetComponent<Text>().text = score.ToString("000000");
@@ -64,6 +76,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gameState = "gameover";
+            SwitchPanel();
+            foreach (Animator animator in animators)
+            {
+                animator.speed = 0;
+            }
+        }
+
         //通常画面からポーズ画面に切り替える
         if (Input.GetButtonDown("Cancel"))
         {
@@ -282,6 +304,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SwitchGameOCButton()
+    {
+        isGameOCButtonSwitched = !isGameOCButtonSwitched;
+        gameOCEntryPanel.SetActive(!isGameOCButtonSwitched);
+        gameOCButtonPanel.SetActive(isGameOCButtonSwitched);
+    }
+
     //カーソルの位置の初期化
     public void InitPosition()
     {
@@ -292,6 +321,24 @@ public class GameManager : MonoBehaviour
                                                                           continueButton.GetComponent<RectTransform>().localPosition.y,
                                                                           arrow_R.GetComponent<RectTransform>().localPosition.z);
         selectButton = "continue";
+    }
+
+    public void InitGameOCPosition()
+    {
+        if (!isGameOCButtonSwitched)
+        {
+
+        }
+        else
+        {
+            gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(gameOCArrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                          gameOCContinueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                          gameOCArrow_L.GetComponent<RectTransform>().localPosition.z);
+            gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(gameOCArrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                              gameOCContinueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                              gameOCArrow_R.GetComponent<RectTransform>().localPosition.z);
+            gameOCSelectButton = "continue";
+        }
     }
 
     //ゲームを続ける
