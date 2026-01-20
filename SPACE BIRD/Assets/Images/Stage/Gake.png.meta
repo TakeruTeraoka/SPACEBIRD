@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: e1e6927bcf07fdf408045b3958b705a7
+guid: bb0a4c4505acacb4291c412cf2261073
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9133243451970415666
-    second: CinemaScope_0
-  - first:
-      213: 3124389748078608586
-    second: CinemaScope_1
+      213: -2666938093100242841
+    second: Gake_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -116,35 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CinemaScope_0
+      name: Gake_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 850
-        width: 1920
-        height: 230
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ec3142e6873304180800000000000000
-      internalID: -9133243451970415666
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CinemaScope_1
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 265
         y: 0
-        width: 1920
-        height: 230
+        width: 759
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ac009121cef0c5b20800000000000000
-      internalID: 3124389748078608586
+      spriteID: 7686dc23fe12dfad0800000000000000
+      internalID: -2666938093100242841
       vertices: []
       indices: 
       edges: []
@@ -163,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CinemaScope_0: -9133243451970415666
-      CinemaScope_1: 3124389748078608586
+      Gake_0: -2666938093100242841
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
