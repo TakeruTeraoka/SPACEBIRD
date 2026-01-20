@@ -2,19 +2,16 @@ using UnityEngine;
 
 public class MovieManager : MonoBehaviour
 {
-    private ChangeScene changeScene;
+    public Camera mainCamera;
+
+    private Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        changeScene = GetComponent<ChangeScene>();
-        changeScene.SceneName = "Stage1";
-        changeScene.Load();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Application.targetFrameRate = 59;
+        GameManager.gameState = "playing";
+        animator = mainCamera.GetComponent<Animator>();
+        animator.Play("Movie_st1");
     }
 }
