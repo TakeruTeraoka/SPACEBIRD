@@ -14,4 +14,14 @@ public class MovieManager : MonoBehaviour
         animator = mainCamera.GetComponent<Animator>();
         animator.Play("Movie_st1");
     }
+
+    void Update()
+    {
+        //デバッグ用
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GetComponent<ChangeScene>().SceneName = "Stage1";
+            GetComponent<ChangeScene>().Load();
+        }
+    }
 }

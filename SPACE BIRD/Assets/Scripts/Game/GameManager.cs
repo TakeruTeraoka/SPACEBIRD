@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public Button gameOCContinueButton;
     public Button gameOCRestartButton;
     public Button gameOCExitButton;
+    public GameObject gameOCBack_Key;
+    public GameObject gameOCBack_Pad;
     public GameObject arrow_L;
     public GameObject arrow_R;
     public GameObject gameOCArrow_L;
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
     private Transform[] chargeMeters = new Transform[7];
     private Animator[] animators = new Animator[7];
     private Transform[] names = new Transform[7];
-    private string[] chars = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+    private string[] chars = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
     private int[] namesChar = { 0, 0, 0 };
 
     private void Start()
@@ -85,10 +87,6 @@ public class GameManager : MonoBehaviour
         {
             gameState = "gameover";
             SwitchPanel();
-            foreach (Animator animator in animators)
-            {
-                animator.speed = 0;
-            }
         }
 
         //通常画面からポーズ画面に切り替える
@@ -101,11 +99,16 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case "playing":
-                GamePlay(); break;
+                GamePlay();
+                break;
             case "paused":
-                GamePause(); break;
+                GamePause();
+                break;
             case "gameover":
-                GameOver(); break;
+                GameOver();
+                break;
+            case "gameclear":
+                break;
         }
     }
 
@@ -202,68 +205,32 @@ public class GameManager : MonoBehaviour
             isMove = true;
             if (Input.GetAxisRaw("Vertical") > 0)
             {
-                if (arrow_L.GetComponent<RectTransform>().localPosition.y == continueButton.GetComponent<RectTransform>().localPosition.y)
+                switch (selectButton)
                 {
-                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
-                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
-                    selectButton = "exit";
-                }
-                else if (arrow_L.GetComponent<RectTransform>().localPosition.y == restartButton.GetComponent<RectTransform>().localPosition.y)
-                {
-                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
-                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
-                    selectButton = "continue";
-                }
-                else
-                {
-                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
-                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
-                    selectButton = "restart";
+                    case "continue":
+                        ReturnTitle();
+                        break;
+                    case "restart":
+                        ContinueGame();
+                        break;
+                    default:
+                        RestartGame();
+                        break;
                 }
             }
             else if (Input.GetAxisRaw("Vertical") < 0)
             {
-                if (arrow_L.GetComponent<RectTransform>().localPosition.y == continueButton.GetComponent<RectTransform>().localPosition.y)
+                switch (selectButton)
                 {
-                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
-                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
-                    selectButton = "restart";
-                }
-                else if (arrow_L.GetComponent<RectTransform>().localPosition.y == restartButton.GetComponent<RectTransform>().localPosition.y)
-                {
-                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
-                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
-                    selectButton = "exit";
-                }
-                else
-                {
-                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
-                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
-                    selectButton = "continue";
+                    case "continue":
+                        RestartGame();
+                        break;
+                    case "restart":
+                        ReturnTitle();
+                        break;
+                    default:
+                        ContinueGame();
+                        break;
                 }
             }
         }
@@ -280,12 +247,10 @@ public class GameManager : MonoBehaviour
                     SwitchPanel();
                     break;
                 case "restart":
-                    RestartGame();
                     changeScene.SceneName = "Stage1";
                     changeScene.Load();
                     break;
                 case "exit":
-                    ReturnTitle();
                     changeScene.SceneName = "Title";
                     changeScene.Load();
                     break;
@@ -295,27 +260,171 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        foreach (Animator animator in animators)
+        {
+            animator.speed = 0;
+        }
+
         if (!isGameOCButtonSwitched)
         {
             if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && !isGameOCMove)
             {
                 isGameOCMove = true;
-
-
+                if (Input.GetAxisRaw("Vertical") > 0)
+                {
+                    if (gameOCSelectButton == "next")
+                    {
+                        GameOCName0();
+                    }
+                    else
+                    {
+                        switch (gameOCSelectButton)
+                        {
+                            case "name0":
+                                SwitchName(0);
+                                break;
+                            case "name1":
+                                SwitchName(1);
+                                break;
+                            case "name2":
+                                SwitchName(2);
+                                break;
+                        }
+                    }
+                }
+                else if (Input.GetAxisRaw("Vertical") < 0 && gameOCSelectButton != "next")
+                {
+                    switch (gameOCSelectButton)
+                    {
+                        case "name0":
+                            ReSwitchName(0);
+                            break;
+                        case "name1":
+                            ReSwitchName(1);
+                            break;
+                        case "name2":
+                            ReSwitchName(2);
+                            break;
+                    }
+                }
+                else if (Input.GetAxisRaw("Horizontal") > 0)
+                {
+                    switch (gameOCSelectButton)
+                    {
+                        case "name0":
+                            GameOCName1();
+                            break;
+                        case "name1":
+                            GameOCName2();
+                            break;
+                        case "name2":
+                            GameOCNext();
+                            break;
+                    }
+                }
+                else if (Input.GetAxisRaw("Horizontal") < 0)
+                {
+                    switch (gameOCSelectButton)
+                    {
+                        case "name1":
+                            GameOCName0();
+                            break;
+                        case "name2":
+                            GameOCName1();
+                            break;
+                        case "next":
+                            GameOCName2();
+                            break;
+                    }
+                }
             }
-            else if (Input.GetAxisRaw("Vertical") == 0)
+            else if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
             {
                 isGameOCMove = false;
             }
 
             if (Input.GetButtonDown("Submit"))
             {
-
+                switch (gameOCSelectButton)
+                {
+                    case "name0":
+                        GameOCName1();
+                        break;
+                    case "name1":
+                        GameOCName2();
+                        break;
+                    case "name2":
+                        GameOCNext();
+                        break;
+                    case "next":
+                        SwitchGameOCButton();
+                        break;
+                }
+            }
+            else if (Input.GetButtonDown("Back"))
+            {
+                switch (gameOCSelectButton)
+                {
+                    case "name1":
+                        GameOCName0();
+                        break;
+                    case "name2":
+                        GameOCName1();
+                        break;
+                    case "next":
+                        GameOCName2();
+                        break;
+                }
             }
         }
         else
         {
+            gameOCBack_Key.SetActive(false);
+            gameOCBack_Pad.SetActive(false);
 
+            if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && !isGameOCMove)
+            {
+                isGameOCMove = true;
+                if (Input.GetAxisRaw("Vertical") > 0)
+                {
+
+                }
+                else if (Input.GetAxisRaw("Vertical") < 0)
+                {
+
+                }
+                else if (Input.GetAxisRaw("Horizontal") > 0)
+                {
+
+                }
+                else if (Input.GetAxisRaw("Horizontal") < 0)
+                {
+
+                }
+            }
+            else if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
+            {
+                isGameOCMove = false;
+            }
+
+            if (Input.GetButtonDown("Submit"))
+            {
+                switch (gameOCSelectButton)
+                {
+                    case "continue":
+                        changeScene.SceneName = currentStage;
+                        break;
+
+                    case "restart":
+                        changeScene.SceneName = "Stage1";
+                        break;
+
+                    case "exit":
+                        changeScene.SceneName = "Title";
+                        break;
+                }
+                changeScene.Load();
+            }
         }
     }
 
@@ -345,21 +454,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SwitchGameOCButton()
-    {
-        gameOCEntryPanel.SetActive(false);
-        gameOCButtonPanel.SetActive(true);
-        isGameOCButtonSwitched = true;
-        InitGameOCPosition();
-    }
-
-    public void SwitchName(int num)
-    {
-        if (namesChar[num] + 1 >= chars.Length) namesChar[num] = 0;
-        else namesChar[num]++;
-        names[(num + 1) * 2].GetComponent<Text>().text = chars[namesChar[num]];
-    }
-
     //カーソルの位置の初期化
     public void InitPosition()
     {
@@ -372,15 +466,55 @@ public class GameManager : MonoBehaviour
         selectButton = "continue";
     }
 
+    //ゲームを続ける
+    public void ContinueGame()
+    {
+        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
+        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                          continueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
+        selectButton = "continue";
+    }
+
+    //ゲームをリスタート
+    public void RestartGame()
+    {
+        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
+        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
+                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
+        selectButton = "restart";
+    }
+
+    //タイトルに戻る
+    public void ReturnTitle()
+    {
+        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
+        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
+                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
+        selectButton = "exit";
+    }
+
+    public void SwitchGameOCButton()
+    {
+        gameOCEntryPanel.SetActive(false);
+        gameOCButtonPanel.SetActive(true);
+        isGameOCButtonSwitched = true;
+        InitGameOCPosition();
+    }
+
     public void InitGameOCPosition()
     {
         if (!isGameOCButtonSwitched)
         {
-            gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
-            gameOCArrow_L.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
-            gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
-            gameOCArrow_R.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
-            gameOCSelectButton = "number0";
+            GameOCName0();
         }
         else
         {
@@ -396,42 +530,75 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //ゲームを続ける
-    public void ContinueGame()
+    public void SwitchName(int num)
     {
-        InitPosition();
+        if (namesChar[num] + 1 >= chars.Length) namesChar[num] = 0;
+        else namesChar[num]++;
+        names[(num + 1) * 2].GetComponent<Text>().text = chars[namesChar[num]];
     }
 
-    //ゲームをリスタート
-    public void RestartGame()
+    private void ReSwitchName(int num)
     {
-        gameState = "playing";
-        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-        selectButton = "restart";
+        if (namesChar[num] - 1 < 0) namesChar[num] = chars.Length - 1;
+        else namesChar[num]--;
+        names[(num + 1) * 2].GetComponent<Text>().text = chars[namesChar[num]];
     }
 
-    //タイトルに戻る
-    public void ReturnTitle()
+    public void GameOCName0()
     {
-        gameState = "";
-        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-        selectButton = "exit";
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(62f, 97f, 0);
+        gameOCArrow_L.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+        gameOCSelectButton = "name0";
     }
 
-    //現在のステージからコンティニューする
-    public void ContinueCurrentStage()
+    public void GameOCName1()
     {
-        changeScene.SceneName = currentStage;
-        changeScene.Load();
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(174f, 97f, 0);
+        gameOCArrow_L.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(165f, -17f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+        gameOCSelectButton = "name1";
+    }
+
+    public void GameOCName2()
+    {
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(289f, 97f, 0);
+        gameOCArrow_L.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(280f, -17f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+        gameOCSelectButton = "name2";
+    }
+
+    public void GameOCNext()
+    {
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(-232.73f, -202.17f, 0);
+        gameOCArrow_L.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(229.24f, -202.17f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
+        gameOCSelectButton = "next";
+    }
+
+    public void GameOCContinueGame()
+    {
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+        gameOCContinueButton.GetComponent<ChangeScene>().SceneName = currentStage;
+        gameOCSelectButton = "continue";
+    }
+
+    public void GameOCRestartGame()
+    {
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+        gameOCSelectButton = "restart";
+    }
+
+    public void GameOCReturnTitle()
+    {
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+        gameOCSelectButton = "exit";
     }
 }
