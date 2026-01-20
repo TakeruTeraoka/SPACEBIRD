@@ -204,82 +204,112 @@ public class GameManager : MonoBehaviour
         //通常処理
         else if (gameState == "playing")
         {
-            //アニメーション速度を等倍に戻す
-            foreach (Animator animator in animators)
+            GamePlay();
+        }
+        else if (gameState == "gameover")
+        {
+            if (!isGameOCButtonSwitched)
             {
-                animator.speed = 1;
-            }
-
-            //スコアの増加
-            if (addScore != 0)
-            {
-                score += addScore;
-                totalScore += addScore;
-                addScore = 0;
-                if (score > 999999)
+                if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && !isGameOCMove)
                 {
-                    zanki++;
-                    score = 0;
+                    isGameOCMove = true;
+
+
                 }
-                scoreText.GetComponent<Text>().text = score.ToString("000000");
-            }
-
-
-            //残機の増減
-            if (addZanki != 0)
-            {
-                if (zanki < 99 && zanki >= 1) zanki += addZanki;
-                else if (zanki <= 0)
+                else if (Input.GetAxisRaw("Vertical") == 0)
                 {
-                    gameState = "gameover";
-                    SwitchPanel();
-                    foreach (Animator animator in animators)
-                    {
-                        animator.speed = 0;
-                    }
+                    isGameOCMove = false;
                 }
-                addZanki = 0;
 
-                zankiText.GetComponent<Text>().text = zanki.ToString("00");
-            }
-
-            //ボムチャージ
-            if (charge < 6)
-            {
-                delta += Time.deltaTime;
-                if (delta >= chargeSpan)
+                if (Input.GetButtonDown("Submit"))
                 {
-                    delta = 0;
-                    charge++;
+
                 }
             }
             else
             {
-                isChargeMax = true;
+
+            }
+        }
+    }
+
+    private void GamePlay()
+    {
+        //アニメーション速度を等倍に戻す
+        foreach (Animator animator in animators)
+        {
+            animator.speed = 1;
+        }
+
+        //スコアの増加
+        if (addScore != 0)
+        {
+            score += addScore;
+            totalScore += addScore;
+            addScore = 0;
+            if (score > 999999)
+            {
+                zanki++;
+                score = 0;
+            }
+            scoreText.GetComponent<Text>().text = score.ToString("000000");
+        }
+
+
+        //残機の増減
+        if (addZanki != 0)
+        {
+            if (zanki < 99 && zanki >= 1) zanki += addZanki;
+            else if (zanki <= 0)
+            {
+                gameState = "gameover";
+                SwitchPanel();
                 foreach (Animator animator in animators)
                 {
-                    animator.Play("Blick");
+                    animator.speed = 0;
                 }
             }
+            addZanki = 0;
 
-            for (int i = 0; i <= charge; i++)
+            zankiText.GetComponent<Text>().text = zanki.ToString("00");
+        }
+
+        //ボムチャージ
+        if (charge < 6)
+        {
+            delta += Time.deltaTime;
+            if (delta >= chargeSpan)
             {
-                chargeMeters[i].gameObject.SetActive(true);
+                delta = 0;
+                charge++;
             }
-
-            if (isChargeMax && PlayerController.isSpecial)
+        }
+        else
+        {
+            isChargeMax = true;
+            foreach (Animator animator in animators)
             {
-                PlayerController.isSpecial = false;
-                isChargeMax = false;
-                charge = 0;
-                foreach (Transform meter in chargeMeters)
-                {
-                    meter.gameObject.SetActive(false);
-                }
-                foreach (Animator animator in animators)
-                {
-                    animator.Play("Stop");
-                }
+                animator.Play("Blick");
+            }
+        }
+
+        for (int i = 0; i <= charge; i++)
+        {
+            chargeMeters[i].gameObject.SetActive(true);
+        }
+
+        if (isChargeMax && PlayerController.isSpecial)
+        {
+            PlayerController.isSpecial = false;
+            isChargeMax = false;
+            charge = 0;
+            foreach (Transform meter in chargeMeters)
+            {
+                meter.gameObject.SetActive(false);
+            }
+            foreach (Animator animator in animators)
+            {
+                animator.Play("Stop");
             }
         }
     }
@@ -322,7 +352,7 @@ public class GameManager : MonoBehaviour
     {
         if (namesChar[num] + 1 >= chars.Length) namesChar[num] = 0;
         else namesChar[num]++;
-        names[(num+1)*2].GetComponent<Text>().text = chars[namesChar[num]];
+        names[(num + 1) * 2].GetComponent<Text>().text = chars[namesChar[num]];
     }
 
     //カーソルの位置の初期化
