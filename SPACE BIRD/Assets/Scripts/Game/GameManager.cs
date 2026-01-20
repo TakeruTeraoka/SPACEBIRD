@@ -98,138 +98,14 @@ public class GameManager : MonoBehaviour
             SwitchPanel();
         }
 
-        //ƒ|[ƒYˆ—
-        if (gameState == "paused")
+        switch (gameState)
         {
-            foreach (Animator animator in animators)
-            {
-                animator.speed = 0;
-            }
-
-            if (Input.GetAxisRaw("Vertical") != 0 && !isMove)
-            {
-                isMove = true;
-                if (Input.GetAxisRaw("Vertical") > 0)
-                {
-                    if (arrow_L.GetComponent<RectTransform>().localPosition.y == continueButton.GetComponent<RectTransform>().localPosition.y)
-                    {
-                        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-                        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-                        selectButton = "exit";
-                    }
-                    else if (arrow_L.GetComponent<RectTransform>().localPosition.y == restartButton.GetComponent<RectTransform>().localPosition.y)
-                    {
-                        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-                        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                          continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-                        selectButton = "continue";
-                    }
-                    else
-                    {
-                        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-                        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-                        selectButton = "restart";
-                    }
-                }
-                else if (Input.GetAxisRaw("Vertical") < 0)
-                {
-                    if (arrow_L.GetComponent<RectTransform>().localPosition.y == continueButton.GetComponent<RectTransform>().localPosition.y)
-                    {
-                        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-                        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                          restartButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-                        selectButton = "restart";
-                    }
-                    else if (arrow_L.GetComponent<RectTransform>().localPosition.y == restartButton.GetComponent<RectTransform>().localPosition.y)
-                    {
-                        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-                        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                          exitButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-                        selectButton = "exit";
-                    }
-                    else
-                    {
-                        arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                                          continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_L.GetComponent<RectTransform>().localPosition.z);
-                        arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                                          continueButton.GetComponent<RectTransform>().localPosition.y,
-                                                                                          arrow_R.GetComponent<RectTransform>().localPosition.z);
-                        selectButton = "continue";
-                    }
-                }
-            }
-            else if (Input.GetAxisRaw("Vertical") == 0)
-            {
-                isMove = false;
-            }
-
-            if (Input.GetButtonDown("Submit"))
-            {
-                switch (selectButton)
-                {
-                    case "continue":
-                        SwitchPanel();
-                        break;
-                    case "restart":
-                        RestartGame();
-                        changeScene.SceneName = "Stage1";
-                        changeScene.Load();
-                        break;
-                    case "exit":
-                        ReturnTitle();
-                        changeScene.SceneName = "Title";
-                        changeScene.Load();
-                        break;
-                }
-            }
-        }
-        //’Êíˆ—
-        else if (gameState == "playing")
-        {
-            GamePlay();
-        }
-        else if (gameState == "gameover")
-        {
-            if (!isGameOCButtonSwitched)
-            {
-                if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && !isGameOCMove)
-                {
-                    isGameOCMove = true;
-
-
-                }
-                else if (Input.GetAxisRaw("Vertical") == 0)
-                {
-                    isGameOCMove = false;
-                }
-
-                if (Input.GetButtonDown("Submit"))
-                {
-
-                }
-            }
-            else
-            {
-
-            }
+            case "playing":
+                GamePlay(); break;
+            case "paused":
+                GamePause(); break;
+            case "gameover":
+                GameOver(); break;
         }
     }
 
@@ -311,6 +187,135 @@ public class GameManager : MonoBehaviour
             {
                 animator.Play("Stop");
             }
+        }
+    }
+
+    private void GamePause()
+    {
+        foreach (Animator animator in animators)
+        {
+            animator.speed = 0;
+        }
+
+        if (Input.GetAxisRaw("Vertical") != 0 && !isMove)
+        {
+            isMove = true;
+            if (Input.GetAxisRaw("Vertical") > 0)
+            {
+                if (arrow_L.GetComponent<RectTransform>().localPosition.y == continueButton.GetComponent<RectTransform>().localPosition.y)
+                {
+                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
+                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
+                    selectButton = "exit";
+                }
+                else if (arrow_L.GetComponent<RectTransform>().localPosition.y == restartButton.GetComponent<RectTransform>().localPosition.y)
+                {
+                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
+                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
+                    selectButton = "continue";
+                }
+                else
+                {
+                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
+                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
+                    selectButton = "restart";
+                }
+            }
+            else if (Input.GetAxisRaw("Vertical") < 0)
+            {
+                if (arrow_L.GetComponent<RectTransform>().localPosition.y == continueButton.GetComponent<RectTransform>().localPosition.y)
+                {
+                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
+                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                                      restartButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
+                    selectButton = "restart";
+                }
+                else if (arrow_L.GetComponent<RectTransform>().localPosition.y == restartButton.GetComponent<RectTransform>().localPosition.y)
+                {
+                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
+                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                                      exitButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
+                    selectButton = "exit";
+                }
+                else
+                {
+                    arrow_L.GetComponent<RectTransform>().localPosition = new Vector3(arrow_L.GetComponent<RectTransform>().localPosition.x,
+                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_L.GetComponent<RectTransform>().localPosition.z);
+                    arrow_R.GetComponent<RectTransform>().localPosition = new Vector3(arrow_R.GetComponent<RectTransform>().localPosition.x,
+                                                                                      continueButton.GetComponent<RectTransform>().localPosition.y,
+                                                                                      arrow_R.GetComponent<RectTransform>().localPosition.z);
+                    selectButton = "continue";
+                }
+            }
+        }
+        else if (Input.GetAxisRaw("Vertical") == 0)
+        {
+            isMove = false;
+        }
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            switch (selectButton)
+            {
+                case "continue":
+                    SwitchPanel();
+                    break;
+                case "restart":
+                    RestartGame();
+                    changeScene.SceneName = "Stage1";
+                    changeScene.Load();
+                    break;
+                case "exit":
+                    ReturnTitle();
+                    changeScene.SceneName = "Title";
+                    changeScene.Load();
+                    break;
+            }
+        }
+    }
+
+    private void GameOver()
+    {
+        if (!isGameOCButtonSwitched)
+        {
+            if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && !isGameOCMove)
+            {
+                isGameOCMove = true;
+
+
+            }
+            else if (Input.GetAxisRaw("Vertical") == 0)
+            {
+                isGameOCMove = false;
+            }
+
+            if (Input.GetButtonDown("Submit"))
+            {
+
+            }
+        }
+        else
+        {
+
         }
     }
 
