@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOCEntryPanel;
     public GameObject gameOCButtonPanel;
     public GameObject guidePanel;
+    public GameObject gameOCNames;
     public Button pauseButton;
     public Button continueButton;
     public Button restartButton;
@@ -44,8 +44,11 @@ public class GameManager : MonoBehaviour
     private string gameOCSelectButton = "continue";
 
     private ChangeScene changeScene;
-    private Transform[] chargeMeters = new Transform[6];
-    private Animator[] animators = new Animator[6];
+    private Transform[] chargeMeters = new Transform[7];
+    private Animator[] animators = new Animator[7];
+    private Transform[] names = new Transform[7];
+    private string[] chars = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+    private int[] namesChar = { 0, 0, 0 };
 
     private void Start()
     {
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviour
         changeScene = this.GetComponent<ChangeScene>();
         chargeMeters = specialPanel.GetComponentsInChildren<Transform>();
         animators = specialPanel.GetComponentsInChildren<Animator>();
+        names = gameOCNames.GetComponentsInChildren<Transform>();
         foreach (Transform meter in chargeMeters)
         {
             meter.gameObject.SetActive(false);
@@ -64,6 +68,7 @@ public class GameManager : MonoBehaviour
         InitGameOCPosition();
         pausedPanel.SetActive(false);
         gameOCPanel.SetActive(false);
+        gameOCButtonPanel.SetActive(false);
         isGameOCButtonSwitched = false;
         totalScore = 0;
         addScore = 0;
@@ -300,15 +305,24 @@ public class GameManager : MonoBehaviour
         {
             gameOCPanel.SetActive(true);
             guidePanel.SetActive(false);
+            InitGameOCPosition();
             gameOCPanel.GetComponent<Animator>().Play("FadeIn");
         }
     }
 
     public void SwitchGameOCButton()
     {
-        isGameOCButtonSwitched = !isGameOCButtonSwitched;
-        gameOCEntryPanel.SetActive(!isGameOCButtonSwitched);
-        gameOCButtonPanel.SetActive(isGameOCButtonSwitched);
+        gameOCEntryPanel.SetActive(false);
+        gameOCButtonPanel.SetActive(true);
+        isGameOCButtonSwitched = true;
+        InitGameOCPosition();
+    }
+
+    public void SwitchName(int num)
+    {
+        if (namesChar[num] + 1 >= chars.Length) namesChar[num] = 0;
+        else namesChar[num]++;
+        names[(num+1)*2].GetComponent<Text>().text = chars[namesChar[num]];
     }
 
     //カーソルの位置の初期化
@@ -327,16 +341,22 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameOCButtonSwitched)
         {
-
+            gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
+            gameOCArrow_L.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+            gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+            gameOCArrow_R.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -90f);
+            gameOCSelectButton = "number0";
         }
         else
         {
-            gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(gameOCArrow_L.GetComponent<RectTransform>().localPosition.x,
-                                                                          gameOCContinueButton.GetComponent<RectTransform>().localPosition.y,
+            gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(-232f,
+                                                                          25f,
                                                                           gameOCArrow_L.GetComponent<RectTransform>().localPosition.z);
-            gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(gameOCArrow_R.GetComponent<RectTransform>().localPosition.x,
-                                                                              gameOCContinueButton.GetComponent<RectTransform>().localPosition.y,
+            gameOCArrow_L.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
+            gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(229f,
+                                                                              25f,
                                                                               gameOCArrow_R.GetComponent<RectTransform>().localPosition.z);
+            gameOCArrow_R.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
             gameOCSelectButton = "continue";
         }
     }

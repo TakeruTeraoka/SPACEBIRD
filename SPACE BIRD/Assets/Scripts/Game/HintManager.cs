@@ -29,8 +29,6 @@ public class HintManager : MonoBehaviour
         }
 
         SwitchGuide();
-
-        Debug.Log("Input:" + input);
     }
 
     private void SwitchGuide()
