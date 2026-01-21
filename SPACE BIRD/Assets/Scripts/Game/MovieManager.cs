@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovieManager : MonoBehaviour
 {
     public Camera mainCamera;
+    public Button skipButton;
 
     private Animator animator;
 
@@ -17,11 +19,14 @@ public class MovieManager : MonoBehaviour
 
     void Update()
     {
-        //デバッグ用
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Cancel"))
         {
-            GetComponent<ChangeScene>().SceneName = "Stage1";
-            GetComponent<ChangeScene>().Load();
+            SkipButtonClick();
         }
+    }
+
+    public void SkipButtonClick()
+    {
+        skipButton.GetComponent<Animator>().Play("Press");
     }
 }
