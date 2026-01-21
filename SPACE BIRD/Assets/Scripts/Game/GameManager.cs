@@ -382,27 +382,41 @@ public class GameManager : MonoBehaviour
             gameOCBack_Key.SetActive(false);
             gameOCBack_Pad.SetActive(false);
 
-            if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && !isGameOCMove)
+            if (Input.GetAxisRaw("Vertical") != 0 && !isGameOCMove)
             {
                 isGameOCMove = true;
                 if (Input.GetAxisRaw("Vertical") > 0)
                 {
-
+                    switch (gameOCSelectButton)
+                    {
+                        case "continue":
+                            GameOCReturnTitle();
+                            break;
+                        case "restart":
+                            GameOCContinueGame();
+                            break;
+                        case "exit":
+                            GameOCRestartGame();
+                            break;
+                    }
                 }
                 else if (Input.GetAxisRaw("Vertical") < 0)
                 {
-
-                }
-                else if (Input.GetAxisRaw("Horizontal") > 0)
-                {
-
-                }
-                else if (Input.GetAxisRaw("Horizontal") < 0)
-                {
-
+                    switch (gameOCSelectButton)
+                    {
+                        case "continue":
+                            GameOCRestartGame();
+                            break;
+                        case "restart":
+                            GameOCReturnTitle();
+                            break;
+                        case "exit":
+                            GameOCContinueGame();
+                            break;
+                    }
                 }
             }
-            else if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
+            else if (Input.GetAxisRaw("Vertical") == 0)
             {
                 isGameOCMove = false;
             }
@@ -582,23 +596,23 @@ public class GameManager : MonoBehaviour
 
     public void GameOCContinueGame()
     {
-        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
-        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(-232.73f, 24.825f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(229.24f, 24.825f, 0);
         gameOCContinueButton.GetComponent<ChangeScene>().SceneName = currentStage;
         gameOCSelectButton = "continue";
     }
 
     public void GameOCRestartGame()
     {
-        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
-        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(-232.73f, -78.498f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(229.24f, -78.498f, 0);
         gameOCSelectButton = "restart";
     }
 
     public void GameOCReturnTitle()
     {
-        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(55f, 97f, 0);
-        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(55f, -17f, 0);
+        gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(-232.73f, -181.82f, 0);
+        gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(229.24f, -181.82f, 0);
         gameOCSelectButton = "exit";
     }
 }
