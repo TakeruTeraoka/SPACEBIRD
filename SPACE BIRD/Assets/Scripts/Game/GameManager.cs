@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOCButtonPanel;
     public GameObject guidePanel;
     public GameObject gameOCNames;
+    public GameObject gameOCHiscoreText;
     public Button pauseButton;
     public Button continueButton;
     public Button restartButton;
@@ -51,6 +52,11 @@ public class GameManager : MonoBehaviour
     private Transform[] names = new Transform[7];
     private string[] chars = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
     private int[] namesChar = { 0, 0, 0 };
+    private struct Hiscore
+    {
+        public string name;
+        public int score;
+    }
 
     private void Start()
     {
@@ -72,10 +78,8 @@ public class GameManager : MonoBehaviour
         gameOCPanel.SetActive(false);
         gameOCButtonPanel.SetActive(false);
         isGameOCButtonSwitched = false;
-        totalScore = 0;
         addScore = 0;
         scoreText.GetComponent<Text>().text = score.ToString("000000");
-        zanki = 5;
         zankiText.GetComponent<Text>().text = zanki.ToString("00");
         charge = 0;
         isChargeMax = false;
@@ -83,10 +87,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Special"))
         {
             gameState = "gameover";
             SwitchPanel();
+        }
+        else if (Input.GetButtonDown("Shot"))
+        {
+            addScore = 1000;
         }
 
         //通常画面からポーズ画面に切り替える
@@ -105,9 +113,10 @@ public class GameManager : MonoBehaviour
                 GamePause();
                 break;
             case "gameover":
+            case "gameclear":
                 GameOver();
                 break;
-            case "gameclear":
+            case "stageclear":
                 break;
         }
     }
@@ -251,6 +260,7 @@ public class GameManager : MonoBehaviour
                     changeScene.Load();
                     break;
                 case "exit":
+                    InitGame();
                     changeScene.SceneName = "Title";
                     changeScene.Load();
                     break;
@@ -434,12 +444,18 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case "exit":
+                        InitGame();
                         changeScene.SceneName = "Title";
                         break;
                 }
                 changeScene.Load();
             }
         }
+    }
+
+    private void StageClear()
+    {
+
     }
 
     //パネル切替
@@ -464,7 +480,16 @@ public class GameManager : MonoBehaviour
             gameOCPanel.SetActive(true);
             guidePanel.SetActive(false);
             InitGameOCPosition();
+            gameOCHiscoreText.GetComponent<Text>().text = totalScore.ToString("00000000");
             gameOCPanel.GetComponent<Animator>().Play("FadeIn");
+        }
+        else if (gameState == "gameclear")
+        {
+            gameOCPanel.SetActive(true);
+            guidePanel.SetActive(false);
+            InitGameOCPosition();
+            gameOCHiscoreText.GetComponent<Text>().text = totalScore.ToString("00000000");
+            gameOCPanel.GetComponent<Animator>().Play("FadeInClear");
         }
     }
 
@@ -516,12 +541,61 @@ public class GameManager : MonoBehaviour
         selectButton = "exit";
     }
 
+    public void SaveGame()
+    {
+        Hiscore[] hiscores = new Hiscore[4];
+        Hiscore temp;
+
+        hiscores[3].name = chars[namesChar[0]] + chars[namesChar[1]] + chars[namesChar[2]];
+        hiscores[3].score = totalScore;
+
+        for (int i = 0; i < 3; i++)
+        {
+            hiscores[i].name = PlayerPrefs.GetString("Name" + i.ToString());
+            hiscores[i].score = PlayerPrefs.GetInt("Score" + i.ToString());
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = i + 1; j < 4; j++)
+            {
+                if (hiscores[i].score <= hiscores[j].score)
+                {
+                    temp = hiscores[i];
+                    hiscores[i] = hiscores[j];
+                    hiscores[j] = temp;
+                }
+            }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            PlayerPrefs.SetString("Name" + i.ToString(), hiscores[i].name);
+            PlayerPrefs.SetInt("Score" + i.ToString(), hiscores[i].score);
+        }
+    }
+
+    public void InitGame()
+    {
+        totalScore = 0;
+        zanki = 5;
+    }
+
     public void SwitchGameOCButton()
     {
-        gameOCEntryPanel.SetActive(false);
-        gameOCButtonPanel.SetActive(true);
-        isGameOCButtonSwitched = true;
-        InitGameOCPosition();
+        SaveGame();
+        if (gameState == "gameover")
+        {
+            gameOCEntryPanel.SetActive(false);
+            gameOCButtonPanel.SetActive(true);
+            isGameOCButtonSwitched = true;
+            InitGameOCPosition();
+        }
+        else if (gameState == "gameclear")
+        {
+            InitGame();
+            Debug.Log("Playing Movie_en");
+        }
     }
 
     public void InitGameOCPosition()

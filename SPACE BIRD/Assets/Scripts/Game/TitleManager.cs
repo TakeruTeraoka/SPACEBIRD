@@ -15,6 +15,13 @@ public class TitleManager : MonoBehaviour
         StartButton = GameObject.Find("StartButton");
         HiscoreButton = GameObject.Find("HiscoreButton");
         this.GetComponent<RectTransform>().localPosition = new Vector3(this.GetComponent<RectTransform>().localPosition.x, StartButton.GetComponent<RectTransform>().localPosition.y, this.GetComponent<RectTransform>().localPosition.z);
+        for (int i = 0; i < 3; i++)
+        {
+            if (PlayerPrefs.GetString("Name" + i.ToString()) == "")
+            {
+                PlayerPrefs.SetString("Name" + i.ToString(), "???");
+            }
+        }
     }
 
     // Update is called once per frame
