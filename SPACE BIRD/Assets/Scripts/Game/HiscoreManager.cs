@@ -24,7 +24,7 @@ public class HiscoreManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Back"))
+        if (Input.GetButtonDown("Back") || Input.GetButtonDown("Cancel"))
         {
             BackButtonClick();
         }
