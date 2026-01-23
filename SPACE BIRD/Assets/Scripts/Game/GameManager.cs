@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOCPanel;
     public GameObject gameOCEntryPanel;
     public GameObject gameOCButtonPanel;
+    public GameObject stageClearPanel;
     public GameObject guidePanel;
     public GameObject gameOCNames;
     public GameObject gameOCHiscoreText;
@@ -31,18 +32,21 @@ public class GameManager : MonoBehaviour
     public Button gameOCContinueButton;
     public Button gameOCRestartButton;
     public Button gameOCExitButton;
+    public Button stageClearNextButton;
     public GameObject gameOCBack_Key;
     public GameObject gameOCBack_Pad;
     public GameObject arrow_L;
     public GameObject arrow_R;
     public GameObject gameOCArrow_L;
     public GameObject gameOCArrow_R;
+    public CountScore countScore;
 
     private int score = 0;  //スコア
     private float delta = 0;    //加算用変数
     private bool isMove = false;    //カーソル移動フラグ
     private bool isGameOCMove = false;
     private bool isGameOCButtonSwitched = false;
+    private bool isStageClear = false;
     private string selectButton = "continue";   //選択されているボタン
     private string gameOCSelectButton = "continue";
 
@@ -52,6 +56,7 @@ public class GameManager : MonoBehaviour
     private Transform[] names = new Transform[7];
     private string[] chars = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
     private int[] namesChar = { 0, 0, 0 };
+
     private struct Hiscore
     {
         public string name;
@@ -77,24 +82,31 @@ public class GameManager : MonoBehaviour
         pausedPanel.SetActive(false);
         gameOCPanel.SetActive(false);
         gameOCButtonPanel.SetActive(false);
-        isGameOCButtonSwitched = false;
+        stageClearPanel.SetActive(false);
         addScore = 0;
         scoreText.GetComponent<Text>().text = score.ToString("000000");
         zankiText.GetComponent<Text>().text = zanki.ToString("00");
-        charge = 0;
-        isChargeMax = false;
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Special"))
+        //デバッグ用
+        if (Input.GetButtonDown("Special") && gameState == "playing")
         {
             gameState = "gameover";
             SwitchPanel();
         }
-        else if (Input.GetButtonDown("Shot"))
+        else if (Input.GetButtonDown("Shot") && gameState == "playing")
         {
             addScore = 1000;
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && gameState == "playing") isStageClear = true;
+        else if (Input.GetKeyDown(KeyCode.C) && gameState == "stageclear")
+        {
+            isStageClear = false;
+            stageClearPanel.SetActive(false);
+            guidePanel.SetActive(true);
+            gameState = "playing";
         }
 
         //通常画面からポーズ画面に切り替える
@@ -117,6 +129,7 @@ public class GameManager : MonoBehaviour
                 GameOver();
                 break;
             case "stageclear":
+                StageClear();
                 break;
         }
     }
@@ -200,6 +213,16 @@ public class GameManager : MonoBehaviour
                 animator.Play("Stop");
             }
         }
+
+        if (isStageClear)
+        {
+            gameState = "stageclear";
+            SwitchPanel();
+            foreach (Animator animator in animators)
+            {
+                animator.speed = 0;
+            }
+        }
     }
 
     private void GamePause()
@@ -256,6 +279,7 @@ public class GameManager : MonoBehaviour
                     SwitchPanel();
                     break;
                 case "restart":
+                    InitGame();
                     changeScene.SceneName = "Stage1";
                     changeScene.Load();
                     break;
@@ -440,6 +464,7 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case "restart":
+                        InitGame();
                         changeScene.SceneName = "Stage1";
                         break;
 
@@ -455,7 +480,10 @@ public class GameManager : MonoBehaviour
 
     private void StageClear()
     {
-
+        if (Input.GetButtonDown("Submit"))
+        {
+            StageClearNext();
+        }
     }
 
     //パネル切替
@@ -491,7 +519,15 @@ public class GameManager : MonoBehaviour
             gameOCHiscoreText.GetComponent<Text>().text = totalScore.ToString("00000000");
             gameOCPanel.GetComponent<Animator>().Play("FadeInClear");
         }
+        else if (gameState == "stageclear")
+        {
+            stageClearPanel.SetActive(true);
+            guidePanel.SetActive(false);
+            stageClearPanel.GetComponent<Animator>().Play("SlideIn");
+        }
     }
+
+
 
     //カーソルの位置の初期化
     public void InitPosition()
@@ -579,6 +615,8 @@ public class GameManager : MonoBehaviour
     {
         totalScore = 0;
         zanki = 5;
+        charge = 0;
+        isChargeMax = false;
     }
 
     public void SwitchGameOCButton()
@@ -688,5 +726,10 @@ public class GameManager : MonoBehaviour
         gameOCArrow_L.GetComponent<RectTransform>().localPosition = new Vector3(-232.73f, -181.82f, 0);
         gameOCArrow_R.GetComponent<RectTransform>().localPosition = new Vector3(229.24f, -181.82f, 0);
         gameOCSelectButton = "exit";
+    }
+
+    public void StageClearNext()
+    {
+        Debug.Log("Change Stage");
     }
 }
