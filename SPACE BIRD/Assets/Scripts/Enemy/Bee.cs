@@ -8,6 +8,7 @@ public class Bee : EnemyBase
     void Start()
     {
         hp = 2;
+        enemyScore = 50;
         speed = this.GetComponent<Animator>().speed;    //現在設定されているアニメーションの速度を取得
     }
 

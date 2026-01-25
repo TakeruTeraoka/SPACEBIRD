@@ -11,9 +11,11 @@ public class GameManager : MonoBehaviour
     public static int zanki = 5;        //残機
     public static int addZanki = 0;     //加算する残機（マイナスを含む）
     public static bool isChargeMax = false;  //ボムチャージ完了フラグ
+    public static bool isScrollStop = false;    //スクロール停止フラグ
     public static int charge = 0;   //ボムチャージ
     public float chargeSpan = 1;    //チャージ間隔
 
+    public GameObject scrollStopWall;
     public GameObject scoreText;
     public GameObject zankiText;
     public GameObject specialPanel;
@@ -40,6 +42,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameOCArrow_L;
     public GameObject gameOCArrow_R;
     public CountScore countScore;
+
+    public string nextSceneName = "";
+    public bool isDebug = false;
 
     private int score = 0;  //スコア
     private float delta = 0;    //加算用変数
@@ -91,23 +96,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //デバッグ用
-        if (Input.GetButtonDown("Special") && gameState == "playing")
-        {
-            gameState = "gameover";
-            SwitchPanel();
-        }
-        else if (Input.GetButtonDown("Shot") && gameState == "playing")
-        {
-            addScore = 1000;
-        }
-        else if (Input.GetKeyDown(KeyCode.C) && gameState == "playing") isStageClear = true;
-        else if (Input.GetKeyDown(KeyCode.C) && gameState == "stageclear")
-        {
-            isStageClear = false;
-            stageClearPanel.SetActive(false);
-            guidePanel.SetActive(true);
-            gameState = "playing";
-        }
+        DebugFunc(isDebug);
 
         //通常画面からポーズ画面に切り替える
         if (Input.GetButtonDown("Cancel"))
@@ -136,6 +125,11 @@ public class GameManager : MonoBehaviour
 
     private void GamePlay()
     {
+        if (scrollStopWall.GetComponent<Transform>().position.x > -9.01f)
+        {
+            isScrollStop = true;
+        }
+
         //アニメーション速度を等倍に戻す
         foreach (Animator animator in animators)
         {
@@ -730,6 +724,37 @@ public class GameManager : MonoBehaviour
 
     public void StageClearNext()
     {
-        Debug.Log("Change Stage");
+        changeScene.SceneName = nextSceneName;
+        changeScene.Load();
+    }
+
+    public void DebugFunc(bool b)
+    {
+        if (!b) return;
+        PlayerPrefs.DeleteAll();
+        for (int i = 0; i < 3; i++)
+        {
+            if (PlayerPrefs.GetString("Name" + i.ToString()) == "")
+            {
+                PlayerPrefs.SetString("Name" + i.ToString(), "???");
+            }
+        }
+        if (Input.GetButtonDown("Special") && gameState == "playing")
+        {
+            gameState = "gameover";
+            SwitchPanel();
+        }
+        else if (Input.GetButtonDown("Shot") && gameState == "playing")
+        {
+            addScore = 1000;
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && gameState == "playing") isStageClear = true;
+        else if (Input.GetKeyDown(KeyCode.C) && gameState == "stageclear")
+        {
+            isStageClear = false;
+            stageClearPanel.SetActive(false);
+            guidePanel.SetActive(true);
+            gameState = "playing";
+        }
     }
 }

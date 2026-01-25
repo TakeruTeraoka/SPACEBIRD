@@ -11,6 +11,7 @@ public class Boss1 : EnemyBase
     private void Start()
     {
         hp = 100;
+        enemyScore = 50;
         speed = this.GetComponent<Animator>().speed;
     }
 

@@ -3,19 +3,17 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     protected int hp;  //HPを管理する変数を宣言
-    //継承先までの権限で、各敵のスコアを宣言
-    protected int enemyScore;//
+    protected int enemyScore;   //継承先までの権限で、各敵のスコアを宣言
+    protected bool isBoss = false;  //ボスかどうかを管理するフラグ
 
     private GameObject barrierShield;   //バリア
     private GameObject bombBoost;       //ボムブースト
     private GameObject scorePoint;      //スコアポイント
-    //private GameObject zankiItem; //残基
+    private GameObject zankiItem;       //残基
 
     private void Start()
     {
-        barrierShield = GameObject.Find("BarrierShield");
-        bombBoost = GameObject.Find("BombBoost");
-        scorePoint = GameObject.Find("ScorePoint");
+
     }
 
 
@@ -40,9 +38,13 @@ public class EnemyBase : MonoBehaviour
             if (hp <= 0)
             {
                 Destroy(gameObject);    //このゲームオブジェクトを破壊する
-                //宣言した敵のスコアを加算する(addscoreに代入)
+                //ボスでない場合下の処理を行う
                 //Scorepointのクローンを自分の位置に出す
                 //50%の確率でアイテムを出す・その中でどのアイテムを出す
+            }
+            else
+            {
+                GameManager.addScore = enemyScore;
             }
         }
     }

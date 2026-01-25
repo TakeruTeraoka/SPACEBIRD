@@ -8,6 +8,7 @@ public class Bat : EnemyBase
     void Start()
     {
         hp = 2;
+        enemyScore = 25;
         speed = this.GetComponent<Animator>().speed;    //現在設定されているアニメーションの速度を取得
     }
 

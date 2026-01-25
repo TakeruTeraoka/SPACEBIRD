@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float DownLimit;
     public float LeftLimit;
     public float RightLimit;
+    public GameObject barrier;
+
     private float speed;
     private Rigidbody2D rbody;
     private float axisH;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        barrier.SetActive(false);
         animator = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         speed = baseSpeed;
@@ -81,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
         {
             GameManager.addZanki = -1;
             rbody.linearVelocity = Vector2.zero;
