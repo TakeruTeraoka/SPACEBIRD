@@ -611,6 +611,7 @@ public class GameManager : MonoBehaviour
         zanki = 5;
         charge = 0;
         isChargeMax = false;
+        isScrollStop = false;
     }
 
     public void SwitchGameOCButton()

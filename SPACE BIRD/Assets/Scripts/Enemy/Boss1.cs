@@ -29,18 +29,21 @@ public class Boss1 : EnemyBase
         //Œ³‚Ì‘¬“x‚É–ß‚·
         this.GetComponent<Animator>().speed = speed;
 
-        //ˆê’èŠÔ‚É’B‚µ‚½ê‡
-        if (delta >= span)
+        if (GameManager.isScrollStop)
         {
-            //‰ÁZ—p•Ï”‚ğ‚O‚É–ß‚·
-            delta = 0;
-            //UŒ‚ˆ—
-            Attack();
-        }
-        else
-        {
-            //ƒtƒŒ[ƒ€ŠÔ‚Ì·‚ğ‰ÁZ‚·‚é
-            delta += Time.deltaTime;
+            //ˆê’èŠÔ‚É’B‚µ‚½ê‡
+            if (delta >= span)
+            {
+                //‰ÁZ—p•Ï”‚ğ‚O‚É–ß‚·
+                delta = 0;
+                //UŒ‚ˆ—
+                Attack();
+            }
+            else
+            {
+                //ƒtƒŒ[ƒ€ŠÔ‚Ì·‚ğ‰ÁZ‚·‚é
+                delta += Time.deltaTime;
+            }
         }
     }
 
