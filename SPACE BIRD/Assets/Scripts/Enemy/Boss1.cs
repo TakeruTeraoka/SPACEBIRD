@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Boss1 : EnemyBase
 {
+    //public GameObject hpMeter;
     public float span = 2.0f; //î≠éÀä‘äu
 
     private float delta = 0;    //â¡éZópïœêî
@@ -9,6 +10,7 @@ public class Boss1 : EnemyBase
 
     private void Start()
     {
+        //hpMeter.SetActive(false);
         hp = 100;
         enemyScore = 50;
         speed = this.GetComponent<Animator>().speed;
@@ -44,6 +46,8 @@ public class Boss1 : EnemyBase
                 delta += Time.deltaTime;
             }
         }
+
+        //HpMeterChange();
     }
 
 
@@ -77,4 +81,16 @@ public class Boss1 : EnemyBase
 
         isSpecial = !isSpecial; //ÉtÉâÉOÇîΩì]
     }
+
+    private void OnBecameVisible()
+    {
+        //hpMeter.SetActive(true);
+        //hpMeter.GetComponent<Animator>().Play("Init");
+    }
+
+    /*private void HpMeterChange()
+    {
+        hpMeter.GetComponent<RectTransform>().localScale =
+            new Vector3(hpMeter.GetComponent<RectTransform>().localScale.x, hp / 100, hpMeter.GetComponent<RectTransform>().localScale.z);
+    }*/
 }
