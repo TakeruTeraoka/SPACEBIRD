@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float DownLimit;
     public float LeftLimit;
     public float RightLimit;
+
     public GameObject barrier;
 
     private float speed;

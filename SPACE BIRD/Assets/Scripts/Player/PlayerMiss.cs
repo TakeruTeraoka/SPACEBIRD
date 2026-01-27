@@ -48,7 +48,7 @@ public class PlayerMiss : MonoBehaviour
                 PlayerController.playerState = "alive";
                 isFalled = false;
                 isTeleported = false;
-                Invoke("PlayStopAnime", 0.3f);
+                Invoke("PlayStopAnime", 1f);
             }
         }
     }
