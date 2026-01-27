@@ -4,7 +4,6 @@ public class Boss1 : EnemyBase
 {
     public float span = 2.0f; //発射間隔
 
-    private float speed = 1;    //アニメーションの再生速度
     private float delta = 0;    //加算用変数
     private bool isSpecial = false; //敵を飛ばしたかどうかを管理するフラグ
 

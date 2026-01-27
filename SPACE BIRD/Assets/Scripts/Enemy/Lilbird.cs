@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Lilbird : EnemyBase
 {
-    private float speed = 1;    //アニメーションの再生速度
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class GreenElement : EnemyBase
 {
-    private float speed = 1;    //アニメーションの再生速度
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         hp = 3;
         enemyScore = 50;
+        speed = this.GetComponent<Animator>().speed;
     }
 
     // Update is called once per frame

@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public static string playerState = "alive";
     public static bool isSpecial = false;
+    public static bool isEnemyDestory = false;
 
     public float baseSpeed = 3.0f;
     public float slowSpeed = 1.0f;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
     private Animator animator;
     private int clickCnt = 0;
+    private Vector3 currentPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,22 +34,41 @@ public class PlayerController : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         speed = baseSpeed;
         isSpecial = false;
+        isEnemyDestory = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        animator.speed = 1;
-
         if (GameManager.gameState != "playing")
         {
             rbody.linearVelocity = Vector2.zero;
             animator.speed = 0;
             return;
         }
+        else
+        {
+            animator.speed = 1;
+        }
 
-        if (playerState != "alive") return;
+        if (playerState == "miss") return;
 
+        PlayerAlive();
+    }
+
+    void FixedUpdate()
+    {
+        if (GameManager.gameState != "playing" || playerState == "miss") return;
+
+        if (!isMoving)
+        {
+            speed = !isSlow ? baseSpeed : slowSpeed;
+            rbody.linearVelocity = new Vector2(axisH * speed, axisV * speed);
+        }
+    }
+
+    private void PlayerAlive()
+    {
         float posX = Mathf.Clamp(transform.position.x, LeftLimit, RightLimit);
         float posY = Mathf.Clamp(transform.position.y, DownLimit, UpLimit);
         transform.position = new Vector2(posX, posY);
@@ -66,26 +88,47 @@ public class PlayerController : MonoBehaviour
             isSlow = false;
         }
 
-        if (Input.GetButtonDown("Special") && GameManager.isChargeMax)
+        if (Input.GetButtonDown("Special") && GameManager.isChargeMax && playerState == "alive")
         {
-            isSpecial = true;
+            playerState = "special";
+            currentPos = transform.position;
+            transform.position = Vector3.zero;
+            animator.Play("Bomb");
         }
     }
 
-    void FixedUpdate()
+    private void EnemyDestory()
     {
-        if (GameManager.gameState != "playing" || playerState != "alive") return;
+        isEnemyDestory = true;
+    }
 
-        if (!isMoving)
-        {
-            speed = !isSlow ? baseSpeed : slowSpeed;
-            rbody.linearVelocity = new Vector2(axisH * speed, axisV * speed);
-        }
+    private void InitPos()
+    {
+        transform.position = currentPos;
+    }
+
+    private void PlayFadeInAnime()
+    {
+        animator.Play("FadeIn");
+    }
+
+    private void PlayRecoveryAnime()
+    {
+        isEnemyDestory = false;
+        animator.Play("Miss");
+        Invoke("PlayStopAnime", 1f);
+    }
+
+    private void PlayStopAnime()
+    {
+        playerState = "alive";
+        isSpecial = true;
+        animator.Play("Stop");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Boss")
         {
             GameManager.addZanki = -1;
             rbody.linearVelocity = Vector2.zero;
@@ -96,7 +139,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMouseDrag()
     {
-        if (GameManager.gameState != "playing" || playerState != "alive") return;
+        if (GameManager.gameState != "playing" || playerState == "miss") return;
 
         isMoving = true;
         PlayerShoot.isPlayerTouch = true;
@@ -114,13 +157,13 @@ public class PlayerController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (GameManager.gameState != "playing" || playerState != "alive") return;
+        if (GameManager.gameState != "playing" || playerState == "miss") return;
 
         clickCnt++;
         Invoke("DoubleClick", 0.3f);
     }
 
-    void DoubleClick()
+    private void DoubleClick()
     {
         if (clickCnt != 2) { clickCnt = 0; return; }
         else
@@ -130,7 +173,7 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.isChargeMax)
         {
-            isSpecial = true;
+            animator.Play("Bomb");
         }
     }
 }

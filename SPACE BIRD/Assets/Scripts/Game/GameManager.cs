@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static bool isChargeMax = false;  //ボムチャージ完了フラグ
     public static bool isScrollStop = false;    //スクロール停止フラグ
     public static int charge = 0;   //ボムチャージ
+
     public float chargeSpan = 1;    //チャージ間隔
 
     public GameObject scrollStopWall;
