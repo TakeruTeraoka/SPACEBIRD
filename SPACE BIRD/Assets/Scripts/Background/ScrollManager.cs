@@ -20,11 +20,11 @@ public class ScrollManager : MonoBehaviour
         {
             if (scrollSpeed > 0)
             {
-                scrollSpeed -= 0.001f;
+                scrollSpeed = Mathf.Max(scrollSpeed - 0.001f, 0);
             }
-            else if (scrollSpeed <= 0)
+            else if (scrollSpeed < 0)
             {
-                scrollSpeed = 0;
+                scrollSpeed = Mathf.Min(scrollSpeed + 0.001f, 0);
             }
         }
         else

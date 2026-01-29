@@ -2,16 +2,12 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    protected int hp;  //HPを管理する変数を宣言
-    protected int enemyScore;   //継承先までの権限で、各敵のスコアを宣言
-    protected float speed = 1;
+    protected int hp;  //HPを管理する変数（継承時のみ使用可）
+    protected int enemyScore;   //各敵のスコア（継承時のみ使用可）
+    protected float speed = 1;  //アニメーションの速度（継承時のみ使用可）
+    protected Animator enemyAnimator;    //各敵のアニメーター
 
-    private bool isSpecialHit = false;
-
-    private void Start()
-    {
-
-    }
+    private bool isSpecialHit = false;  //ボム攻撃の被弾を一度だけ有効にするフラグ（ボス用）
 
     //Updateの中で一番最後に実行される
     private void LateUpdate()
@@ -21,7 +17,7 @@ public class EnemyBase : MonoBehaviour
             switch (gameObject.tag)
             {
                 case "Enemy":
-                    Destroy(gameObject);
+                    EnemyDestory();
                     break;
                 case "Boss":
                     if (!isSpecialHit)
@@ -41,11 +37,9 @@ public class EnemyBase : MonoBehaviour
         //敵オブジェクトのX座標が11以上の場合
         if (this.transform.position.x >= 11)
         {
-            Destroy(gameObject);    //このゲームオブジェクトを破壊する
+            EnemyDestory();
         }
     }
-
-
 
     //当たり判定
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,12 +51,17 @@ public class EnemyBase : MonoBehaviour
             //HPが０以下になった場合
             if (hp <= 0)
             {
-                Destroy(gameObject);    //このゲームオブジェクトを破壊する
+                EnemyDestory();
             }
             else
             {
                 GameManager.addScore = enemyScore;
             }
         }
+    }
+
+    public void EnemyDestory()
+    {
+        Destroy(gameObject);    //このゲームオブジェクトを破壊する
     }
 }

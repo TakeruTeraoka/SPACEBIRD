@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2bea514da58294e818e9bad61918ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.1
+  scrollSpeed: 0.15
   cloneStartPoint: 0.053
   destroyPoint: 18.1842
   clonePoint: -18.08329

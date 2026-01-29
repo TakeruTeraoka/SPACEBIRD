@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static string gameState = "";
-    public static string currentStage = "";
+    public static string gameState = "";    //ゲームの状態
     public static int totalScore = 0;   //合計スコア
     public static int addScore = 0;     //加算するスコア
     public static int zanki = 5;        //残機
@@ -16,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public float chargeSpan = 1;    //チャージ間隔
 
+    //UIパネル・ボタン・矢印・スコアカウントクラス
     public GameObject scrollStopWall;
     public GameObject scoreText;
     public GameObject zankiText;
@@ -44,25 +44,33 @@ public class GameManager : MonoBehaviour
     public GameObject gameOCArrow_R;
     public CountScore countScore;
 
-    public string nextSceneName = "";
-    public bool isDebug = false;
+    public string nextSceneName = "";   //次にロードされるシーン名
+    public bool isDebug = false;    //デバッグ切替用
+    public string currentStage = ""; //現在のステージ名
+    public bool isScrollStopOn = false; //ステージのスクロール停止のオンオフ管理フラグ
 
     private int score = 0;  //スコア
     private float delta = 0;    //加算用変数
-    private bool isMove = false;    //カーソル移動フラグ
+
+    //カーソル移動フラグ
+    private bool isMove = false;
     private bool isGameOCMove = false;
-    private bool isGameOCButtonSwitched = false;
-    private bool isStageClear = false;
+
+    private bool isGameOCButtonSwitched = false;    //ゲームオーバー・クリアパネルのボタン表示切替フラグ
+    private bool isStageClear = false;  //ステージクリアフラグ
     private string selectButton = "continue";   //選択されているボタン
-    private string gameOCSelectButton = "continue";
+    private string gameOCSelectButton = "continue"; //ゲームオーバー・クリアパネルの選択されているボタン
 
-    private ChangeScene changeScene;
-    private Transform[] chargeMeters = new Transform[7];
-    private Animator[] animators = new Animator[7];
-    private Transform[] names = new Transform[7];
+    private ChangeScene changeScene;    //シーン切替フラグ
+    private Transform[] chargeMeters = new Transform[7];    //ボムチャージメーター×６（取得する際、親オブジェクトも同時に取得するため７枠）
+    private Animator[] animators = new Animator[7]; //ボムチャージメーターのアニメーション×６（取得する際、親オブジェクトも同時に取得するため７枠）
+    private Transform[] names = new Transform[7];   //ゲームオーバー・クリアパネルの名前登録部分のボタン×３（取得する際、親オブジェクトも同時に取得するため７枠）
+
+    //名前登録に使用する文字配列
     private string[] chars = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-    private int[] namesChar = { 0, 0, 0 };
+    private int[] namesChar = { 0, 0, 0 };  //各ボタンの文字配列のインデックスの管理用配列
 
+    //ハイスコア情報を管理するための構造体
     private struct Hiscore
     {
         public string name;
@@ -71,20 +79,24 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //ゲームのフレームレートを59fpsに固定（※WebGLでビルドする際に60fpsで固定しようとするとfps固定がスキップされるので注意※）
         Application.targetFrameRate = 59;
+
+        //ゲームオブジェクトからコンポーネントを取得（thisはこのスクリプトがアタッチされているオブジェクトから）
         changeScene = this.GetComponent<ChangeScene>();
         chargeMeters = specialPanel.GetComponentsInChildren<Transform>();
         animators = specialPanel.GetComponentsInChildren<Animator>();
         names = gameOCNames.GetComponentsInChildren<Transform>();
+
+        //ボムチャージメーターをすべて非表示に設定
         foreach (Transform meter in chargeMeters)
         {
             meter.gameObject.SetActive(false);
+
         }
         PlayerController.playerState = "alive";
         gameState = "playing";
         currentStage = SceneManager.GetActiveScene().name;
-        InitPosition();
-        InitGameOCPosition();
         pausedPanel.SetActive(false);
         gameOCPanel.SetActive(false);
         gameOCButtonPanel.SetActive(false);
@@ -102,7 +114,6 @@ public class GameManager : MonoBehaviour
         //通常画面からポーズ画面に切り替える
         if (Input.GetButtonDown("Cancel"))
         {
-            InitPosition();
             SwitchPanel();
         }
 
@@ -126,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     private void GamePlay()
     {
-        if (scrollStopWall.GetComponent<Transform>().position.x > -9.01f)
+        if (scrollStopWall.GetComponent<Transform>().position.x > -9.01f && isScrollStopOn)
         {
             isScrollStop = true;
         }
@@ -220,6 +231,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //ポーズ処理
     private void GamePause()
     {
         foreach (Animator animator in animators)
@@ -287,6 +299,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //ゲームオーバー処理
     private void GameOver()
     {
         foreach (Animator animator in animators)
@@ -473,6 +486,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //ステージクリア処理
     private void StageClear()
     {
         if (Input.GetButtonDown("Submit"))
@@ -486,6 +500,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == "playing")
         {
+            InitPosition();
             gameState = "paused";
             pausedPanel.SetActive(true);
             guidePanel.SetActive(false);
@@ -572,6 +587,7 @@ public class GameManager : MonoBehaviour
         selectButton = "exit";
     }
 
+    //セーブ処理
     public void SaveGame()
     {
         Hiscore[] hiscores = new Hiscore[4];
@@ -606,6 +622,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //static変数の初期化
     public void InitGame()
     {
         totalScore = 0;
@@ -615,6 +632,7 @@ public class GameManager : MonoBehaviour
         isScrollStop = false;
     }
 
+    //ゲームオーバー・クリアパネルのボタン切替処理
     public void SwitchGameOCButton()
     {
         SaveGame();
@@ -632,6 +650,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //ゲームオーバー・クリアパネルのカーソルの位置の初期化処理
     public void InitGameOCPosition()
     {
         if (!isGameOCButtonSwitched)
@@ -652,6 +671,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //名前登録の各ボタンで選択している名前を進める処理
     public void SwitchName(int num)
     {
         if (namesChar[num] + 1 >= chars.Length) namesChar[num] = 0;
@@ -659,12 +679,15 @@ public class GameManager : MonoBehaviour
         names[(num + 1) * 2].GetComponent<Text>().text = chars[namesChar[num]];
     }
 
+    //名前登録の各ボタンで選択している名前を戻す処理
     private void ReSwitchName(int num)
     {
         if (namesChar[num] - 1 < 0) namesChar[num] = chars.Length - 1;
         else namesChar[num]--;
         names[(num + 1) * 2].GetComponent<Text>().text = chars[namesChar[num]];
     }
+
+    //------------------------------------各UIボタンの選択処理---------------------------------------------------------
 
     public void GameOCName0()
     {
@@ -730,6 +753,9 @@ public class GameManager : MonoBehaviour
         changeScene.Load();
     }
 
+    //---------------------------------------------------------------------------------------------------------------
+
+    //デバッグ処理
     public void DebugFunc(bool b)
     {
         if (!b) return;
