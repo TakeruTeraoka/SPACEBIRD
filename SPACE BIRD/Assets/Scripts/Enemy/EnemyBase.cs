@@ -51,6 +51,10 @@ public class EnemyBase : MonoBehaviour
             //HP‚ª‚OˆÈ‰º‚É‚È‚Á‚½ê‡
             if (hp <= 0)
             {
+                if(gameObject.tag == "Boss")
+                {
+                    GameManager.gameState = "stageclear";
+                }
                 EnemyDestory();
             }
             else

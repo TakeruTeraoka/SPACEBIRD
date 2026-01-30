@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     public float LeftLimit;
     public float RightLimit;
 
-    public GameObject barrier;
-
     private float speed;
     private Rigidbody2D rbody;
     private float axisH;
@@ -29,7 +27,6 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        barrier.SetActive(false);
         animator = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         speed = baseSpeed;

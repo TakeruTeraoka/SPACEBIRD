@@ -1107,7 +1107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0025634766, y: -78.497986}
+  m_AnchoredPosition: {x: -0.0026855469, y: -78.497925}
   m_SizeDelta: {x: -856.04, y: -436.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5377539487827604941
@@ -1329,7 +1329,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597371186644444155}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0005493164}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0005495093}
   m_LocalScale: {x: 1.0000802, y: 1.0000802, z: 1.0000802}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1337,8 +1337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -148.29851, y: 0.0022287369}
-  m_SizeDelta: {x: 289.04, y: 76.91}
+  m_AnchoredPosition: {x: -148.29501, y: 0.0022335052}
+  m_SizeDelta: {x: 218.99, y: 76.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6817574325067759273
 CanvasRenderer:
@@ -1381,7 +1381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'HISCORE:'
+  m_Text: 'TOTAL:'
 --- !u!1 &1689802700210594215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,6 +1579,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: InitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GameOCRestartGame
@@ -1783,7 +1795,7 @@ GameObject:
   - component: {fileID: 6724890857049455675}
   - component: {fileID: 7762303127195087260}
   m_Layer: 5
-  m_Name: Hiscore
+  m_Name: Total
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1807,8 +1819,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.575989, y: 8.120056}
-  m_SizeDelta: {x: -113.67, y: -240.56}
+  m_AnchoredPosition: {x: 6.7974854, y: 0}
+  m_SizeDelta: {x: -183.73, y: -240.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6724890857049455675
 CanvasRenderer:
@@ -2468,7 +2480,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3530368559829563052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0005493164}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0005495093}
   m_LocalScale: {x: 1.0000802, y: 1.0000802, z: 1.0000802}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2476,7 +2488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 144.94153, y: 0.0022287369}
+  m_AnchoredPosition: {x: 109.912445, y: 0.0022335052}
   m_SizeDelta: {x: 295.76, y: 76.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &190779113674306105
@@ -3169,7 +3181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.7974854, y: -81.82007}
+  m_AnchoredPosition: {x: -6.7976074, y: -81.82007}
   m_SizeDelta: {x: -580.69, y: -402.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4662642322006356218
@@ -4176,6 +4188,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: InitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GameOCReturnTitle
         m_Mode: 1
         m_Arguments:
@@ -5113,7 +5137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -490.99997, y: -234.66003}
+  m_AnchoredPosition: {x: -491.0001, y: -234.66003}
   m_SizeDelta: {x: -1010.9, y: -472.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2422876375842773086

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool isChargeMax = false;  //ボムチャージ完了フラグ
     public static bool isScrollStop = false;    //スクロール停止フラグ
     public static int charge = 0;   //ボムチャージ
+    public static int stageNum = 1; //ステージ番号
 
     public float chargeSpan = 1;    //チャージ間隔
 
@@ -57,7 +58,6 @@ public class GameManager : MonoBehaviour
     private bool isGameOCMove = false;
 
     private bool isGameOCButtonSwitched = false;    //ゲームオーバー・クリアパネルのボタン表示切替フラグ
-    private bool isStageClear = false;  //ステージクリアフラグ
     private string selectButton = "continue";   //選択されているボタン
     private string gameOCSelectButton = "continue"; //ゲームオーバー・クリアパネルの選択されているボタン
 
@@ -127,9 +127,11 @@ public class GameManager : MonoBehaviour
                 break;
             case "gameover":
             case "gameclear":
+                SwitchPanel();
                 GameOver();
                 break;
             case "stageclear":
+                SwitchPanel();
                 StageClear();
                 break;
         }
@@ -170,7 +172,6 @@ public class GameManager : MonoBehaviour
             else if (zanki <= 0)
             {
                 gameState = "gameover";
-                SwitchPanel();
                 foreach (Animator animator in animators)
                 {
                     animator.speed = 0;
@@ -217,16 +218,6 @@ public class GameManager : MonoBehaviour
             foreach (Animator animator in animators)
             {
                 animator.Play("Stop");
-            }
-        }
-
-        if (isStageClear)
-        {
-            gameState = "stageclear";
-            SwitchPanel();
-            foreach (Animator animator in animators)
-            {
-                animator.speed = 0;
             }
         }
     }
@@ -286,8 +277,8 @@ public class GameManager : MonoBehaviour
                     SwitchPanel();
                     break;
                 case "restart":
-                    InitGame();
-                    changeScene.SceneName = "Stage1";
+                    isScrollStop = false;
+                    changeScene.SceneName = currentStage;
                     changeScene.Load();
                     break;
                 case "exit":
@@ -468,6 +459,8 @@ public class GameManager : MonoBehaviour
                 switch (gameOCSelectButton)
                 {
                     case "continue":
+                        isScrollStop = false;
+                        zanki = 5;
                         changeScene.SceneName = currentStage;
                         break;
 
@@ -536,8 +529,6 @@ public class GameManager : MonoBehaviour
             stageClearPanel.GetComponent<Animator>().Play("SlideIn");
         }
     }
-
-
 
     //カーソルの位置の初期化
     public void InitPosition()
@@ -749,6 +740,8 @@ public class GameManager : MonoBehaviour
 
     public void StageClearNext()
     {
+        stageNum++;
+        nextSceneName = "Stage" + stageNum;
         changeScene.SceneName = nextSceneName;
         changeScene.Load();
     }
@@ -759,30 +752,36 @@ public class GameManager : MonoBehaviour
     public void DebugFunc(bool b)
     {
         if (!b) return;
-        PlayerPrefs.DeleteAll();
-        for (int i = 0; i < 3; i++)
-        {
-            if (PlayerPrefs.GetString("Name" + i.ToString()) == "")
-            {
-                PlayerPrefs.SetString("Name" + i.ToString(), "???");
-            }
-        }
-        if (Input.GetButtonDown("Special") && gameState == "playing")
+        if (Input.GetKeyDown(KeyCode.E) && gameState == "playing")
         {
             gameState = "gameover";
-            SwitchPanel();
         }
         else if (Input.GetButtonDown("Shot") && gameState == "playing")
         {
             addScore = 1000;
         }
-        else if (Input.GetKeyDown(KeyCode.C) && gameState == "playing") isStageClear = true;
+        else if (Input.GetKeyDown(KeyCode.C) && gameState == "playing") gameState = "stageclear";
         else if (Input.GetKeyDown(KeyCode.C) && gameState == "stageclear")
         {
-            isStageClear = false;
             stageClearPanel.SetActive(false);
             guidePanel.SetActive(true);
             gameState = "playing";
+        }
+        else if (Input.GetKeyDown(KeyCode.F) && gameState == "playing")
+        {
+            zanki = 0;
+            zankiText.GetComponent<Text>().text = zanki.ToString("00");
+        }
+        else if (Input.GetKeyDown(KeyCode.R) && gameState == "playing")
+        {
+            PlayerPrefs.DeleteAll();
+            for (int i = 0; i < 3; i++)
+            {
+                if (PlayerPrefs.GetString("Name" + i.ToString()) == "")
+                {
+                    PlayerPrefs.SetString("Name" + i.ToString(), "???");
+                }
+            }
         }
     }
 }

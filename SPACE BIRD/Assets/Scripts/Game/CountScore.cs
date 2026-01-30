@@ -13,7 +13,10 @@ public class CountScore : MonoBehaviour
     {
         if (isCount && cnt != GameManager.totalScore)
         {
-            cnt += (GameManager.totalScore / 100);
+            if (GameManager.totalScore != 0)
+            {
+                cnt += (GameManager.totalScore / 100);
+            }
             stageClearHiscoreText.GetComponent<Text>().text = cnt.ToString("00000000");
         }
         else
