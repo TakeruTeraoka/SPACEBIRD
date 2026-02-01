@@ -284,6 +284,10 @@ public class GameManager : MonoBehaviour
                     break;
                 case "restart":
                     isScrollStop = false;
+                    if (zanki < 5)
+                    {
+                        zanki = 5;
+                    }
                     changeScene.SceneName = currentStage;
                     changeScene.Load();
                     break;

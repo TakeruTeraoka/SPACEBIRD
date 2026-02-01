@@ -17,7 +17,7 @@ public class EnemyBase : MonoBehaviour
             switch (gameObject.tag)
             {
                 case "Enemy":
-                    EnemyDestory();
+                    enemyAnimator.Play("Clear");
                     break;
                 case "Boss":
                     if (!isSpecialHit)
