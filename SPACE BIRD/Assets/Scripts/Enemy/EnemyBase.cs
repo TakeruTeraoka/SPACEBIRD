@@ -51,11 +51,7 @@ public class EnemyBase : MonoBehaviour
             //HPが０以下になった場合
             if (hp <= 0)
             {
-                if(gameObject.tag == "Boss")
-                {
-                    GameManager.gameState = "stageclear";
-                }
-                EnemyDestory();
+                enemyAnimator.Play("Clear");
             }
             else
             {
@@ -67,5 +63,10 @@ public class EnemyBase : MonoBehaviour
     public void EnemyDestory()
     {
         Destroy(gameObject);    //このゲームオブジェクトを破壊する
+    }
+
+    public void StageClear()
+    {
+        GameManager.gameState = "stageclear";
     }
 }

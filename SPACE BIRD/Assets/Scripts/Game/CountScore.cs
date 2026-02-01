@@ -11,7 +11,7 @@ public class CountScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isCount && cnt != GameManager.totalScore)
+        if (isCount && cnt <= GameManager.totalScore)
         {
             if (GameManager.totalScore != 0)
             {

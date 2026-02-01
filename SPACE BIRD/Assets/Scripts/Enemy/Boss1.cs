@@ -13,6 +13,7 @@ public class Boss1 : EnemyBase
         //hpMeter.SetActive(false);
         hp = 100;
         enemyScore = 50;
+        enemyAnimator = this.GetComponent<Animator>();
         speed = this.GetComponent<Animator>().speed;
     }
 
@@ -50,13 +51,6 @@ public class Boss1 : EnemyBase
         //HpMeterChange();
     }
 
-
-    //停止時アニメーション再生
-    public void AnimationStop()
-    {
-        this.GetComponent<Animator>().Play("Stop");
-    }
-
     //攻撃
     public void Attack()
     {
@@ -80,6 +74,11 @@ public class Boss1 : EnemyBase
         }
 
         isSpecial = !isSpecial; //フラグを反転
+    }
+
+    public void PlayStopAnime()
+    {
+        enemyAnimator.Play("Stop");
     }
 
     private void OnBecameVisible()

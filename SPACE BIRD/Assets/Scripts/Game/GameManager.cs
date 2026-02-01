@@ -58,8 +58,10 @@ public class GameManager : MonoBehaviour
     private bool isGameOCMove = false;
 
     private bool isGameOCButtonSwitched = false;    //ゲームオーバー・クリアパネルのボタン表示切替フラグ
+    private bool isStageClearPanelSwitched = false; //ステージクリアパネル表示切替フラグ
     private string selectButton = "continue";   //選択されているボタン
     private string gameOCSelectButton = "continue"; //ゲームオーバー・クリアパネルの選択されているボタン
+
 
     private ChangeScene changeScene;    //シーン切替フラグ
     private Transform[] chargeMeters = new Transform[7];    //ボムチャージメーター×６（取得する際、親オブジェクトも同時に取得するため７枠）
@@ -127,11 +129,14 @@ public class GameManager : MonoBehaviour
                 break;
             case "gameover":
             case "gameclear":
-                SwitchPanel();
                 GameOver();
                 break;
             case "stageclear":
-                SwitchPanel();
+                if (!isStageClearPanelSwitched)
+                {
+                    isStageClearPanelSwitched = true;
+                    SwitchPanel();
+                }
                 StageClear();
                 break;
         }
@@ -172,6 +177,7 @@ public class GameManager : MonoBehaviour
             else if (zanki <= 0)
             {
                 gameState = "gameover";
+                SwitchPanel();
                 foreach (Animator animator in animators)
                 {
                     animator.speed = 0;
@@ -616,6 +622,7 @@ public class GameManager : MonoBehaviour
     //static変数の初期化
     public void InitGame()
     {
+        stageNum = 1;
         totalScore = 0;
         zanki = 5;
         charge = 0;
@@ -740,10 +747,15 @@ public class GameManager : MonoBehaviour
 
     public void StageClearNext()
     {
-        stageNum++;
-        nextSceneName = "Stage" + stageNum;
-        changeScene.SceneName = nextSceneName;
-        changeScene.Load();
+        isScrollStop = false;
+        addScore = 0;
+        if (stageNum != 5)
+        {
+            stageNum++;
+            nextSceneName = "Stage" + stageNum;
+            changeScene.SceneName = nextSceneName;
+            changeScene.Load();
+        }
     }
 
     //---------------------------------------------------------------------------------------------------------------
@@ -755,12 +767,17 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && gameState == "playing")
         {
             gameState = "gameover";
+            SwitchPanel();
         }
         else if (Input.GetButtonDown("Shot") && gameState == "playing")
         {
             addScore = 1000;
         }
-        else if (Input.GetKeyDown(KeyCode.C) && gameState == "playing") gameState = "stageclear";
+        else if (Input.GetKeyDown(KeyCode.C) && gameState == "playing")
+        {
+            gameState = "stageclear";
+            SwitchPanel();
+        }
         else if (Input.GetKeyDown(KeyCode.C) && gameState == "stageclear")
         {
             stageClearPanel.SetActive(false);

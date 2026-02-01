@@ -170,6 +170,9 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.isChargeMax)
         {
+            playerState = "special";
+            currentPos = transform.position;
+            transform.position = Vector3.zero;
             animator.Play("Bomb");
         }
     }
