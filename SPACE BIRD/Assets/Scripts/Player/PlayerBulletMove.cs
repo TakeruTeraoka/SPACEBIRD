@@ -10,7 +10,7 @@ public class PlayerBulletMove : MonoBehaviour
         if (GameManager.gameState != "playing") return;
 
         transform.Translate(-playerBulletSpeed, 0, 0);
-        if (transform.position.x < -9.153)
+        if (transform.position.x <= -8.5)
         {
             Destroy(gameObject);
         }

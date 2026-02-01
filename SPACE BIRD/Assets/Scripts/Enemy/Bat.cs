@@ -35,7 +35,7 @@ public class Bat : EnemyBase
         }
         else if (isBulletHit || timer >= timeLimit)
         {
-            transform.Translate(0.08f, 0, 0);
+            transform.Translate(0.16f, 0, 0);
         }
     }
 

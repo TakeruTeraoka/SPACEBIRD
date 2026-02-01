@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f71730c2afc41a40859c2badbe378bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 3
+  timeLimit: 1.5
 --- !u!1 &2527303545471404192
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7861399581328958535, guid: 603c56129d29f7c40b053ee12c4fee54, type: 3}
       propertyPath: span
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
