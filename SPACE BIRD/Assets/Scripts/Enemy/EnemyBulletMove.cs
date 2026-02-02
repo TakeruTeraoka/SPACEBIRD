@@ -31,6 +31,14 @@ public class EnemyBulletMove : MonoBehaviour
 
         //移動
         transform.Translate(differencePos.x / enemyBulletTime, differencePos.y / enemyBulletTime, 0);
+
+        //もしプレイヤーがミスした場合
+        if (PlayerController.playerState != "alive")
+        {
+            //弾を破壊する
+            Destroy(gameObject);
+        }
+
         //もし指定範囲を超える場合
         if (transform.position.y > topLimit || transform.position.y < bottomLimit ||
             transform.position.x > rightLimit || transform.position.x < leftLimit)

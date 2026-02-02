@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     private void PlayRecoveryAnime()
     {
         isEnemyDestory = false;
-        animator.Play("Miss");
+        animator.Play("Recovery");
         Invoke("PlayStopAnime", 1f);
     }
 
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Boss")
+        if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Boss") && playerState != "recovery")
         {
             GameManager.addZanki = -1;
             rbody.linearVelocity = Vector2.zero;

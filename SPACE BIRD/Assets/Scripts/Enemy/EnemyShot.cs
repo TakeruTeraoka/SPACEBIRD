@@ -11,7 +11,7 @@ public class EnemyShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameState != "playing") return;
+        if (GameManager.gameState != "playing" || PlayerController.playerState != "alive") return;
 
         if (this.transform.position.x >= shotStartPos)
         {

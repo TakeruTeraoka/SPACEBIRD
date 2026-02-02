@@ -11,19 +11,19 @@ public class CountScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isCount && cnt <= GameManager.totalScore)
+        if (isCount && cnt < GameManager.totalScore)
         {
             if (GameManager.totalScore != 0)
             {
                 cnt += (GameManager.totalScore / 100);
             }
-            stageClearHiscoreText.GetComponent<Text>().text = cnt.ToString("00000000");
         }
         else
         {
             isCount = false;
-            cnt = 0;
         }
+
+        stageClearHiscoreText.GetComponent<Text>().text = cnt.ToString("00000000");
     }
 
     public void Count()

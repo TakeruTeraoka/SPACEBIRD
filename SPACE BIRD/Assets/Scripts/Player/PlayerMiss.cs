@@ -47,17 +47,16 @@ public class PlayerMiss : MonoBehaviour
                 rbody.linearVelocity = Vector3.zero;
                 isFalled = false;
                 isTeleported = false;
-                PlayerController.playerState = "alive";
-                Invoke("PlayStopAnime", 1f);
+                PlayerController.playerState = "recovery";
+                animator.Play("Recovery");
+                Invoke("PlayStopAnime", 1.5f);
             }
         }
     }
 
     private void PlayStopAnime()
     {
-        if (PlayerController.playerState == "alive")
-        {
-            animator.Play("Stop");
-        }
+        PlayerController.playerState = "alive";
+        animator.Play("Stop");
     }
 }

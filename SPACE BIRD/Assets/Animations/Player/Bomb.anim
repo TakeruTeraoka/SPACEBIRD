@@ -1859,7 +1859,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4166666
+  - time: 1.4
     functionName: InitPos
     data: 
     objectReferenceParameter: {fileID: 0}
