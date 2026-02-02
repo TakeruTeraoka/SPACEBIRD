@@ -1,0 +1,174 @@
+/* --- bodyの基本設定 --- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif; /* フォントを指定しておくと表示が安定 */
+    background-color: #FFFFFF; /* デスクトップのデフォルトは白 */
+    width: 100vw; /* 常にビューポート全体を使用 */
+    height: 100vh;
+    overflow: hidden; /* デスクトップでもスクロールを基本的には禁止 */
+    
+    /* デスクトップでunity-containerを中央に配置するFlexbox設定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Unityコンテナの基本設定 --- */
+#unity-container {
+    /* デスクトップではFlexboxで中央配置されるため、position: relativeだけでOK */
+    position: relative; 
+    text-align: initial; /* テキストアラインのリセット */
+    width: auto; /* デスクトップではコンテンツの幅に合わせる */
+    height: auto;
+    background-color: transparent; /* 背景は透過させてbodyの色が見えるように */
+    display: block; /* Flexアイテムとしての挙動 */
+}
+
+/* --- モバイル専用のbody設定 (JSで body.classList.add("mode-mobile") で付与) --- */
+body.mode-mobile {
+    background-color: #000000 !important; /* モバイルは背景を黒に固定 */
+    /* width, height, overflow, display, justify-content, align-items はbodyのデフォルト設定でカバーされる */
+}
+
+/* --- モバイルコンテナの追加スタイル (JSで #unity-container.className = "unity-mobile" で付与) --- */
+.unity-mobile {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* 影で境界を強調 */
+}
+
+/* --- フルスクリーン時のコンテナ設定 --- */
+/* フルスクリーン中はコンテナ自体が画面全体を覆い、その中でキャンバスを中央に配置 */
+#unity-container:fullscreen,
+#unity-container:-webkit-full-screen,
+#unity-container:-moz-full-screen,
+#unity-container:-ms-fullscreen { /* IE/Edgeのプレフィックスも追加 */
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: #000000; /* フルスクリーン時の余白は常に黒 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+/* --- キャンバス要素の基本設定 --- */
+#unity-canvas {
+    display: block; /* ブロック要素にして中央揃えを安定させる */
+    background: {{{BACKGROUND_COLOR}}}; /* Unityからの背景色 */
+    margin: auto; /* Flexboxと組み合わせることで中央配置に貢献 */
+    /* サイズはJavaScriptで厳密に制御するため、ここでは最小限 */
+}
+
+/* --- モバイル時のキャンバス設定 --- */
+/* モバイルでは、JavaScriptがコンテナまたはキャンバスに直接px単位でサイズを設定するため、
+   CSSでのwidth/height: 100% や aspect-ratio は冗長になる可能性がありますが、
+   フォールバックとして残しておくか、削除しても良い場合があります。
+   今回はJavaScriptでの制御を優先するため、基本的な設定に留めます。 */
+.unity-mobile #unity-canvas {
+    /* JavaScriptでサイズが指定されるので、ここはシンプルに */
+    display: block; 
+}
+
+
+/* --- フルスクリーンボタンのスタイル --- */
+#mobile-fullscreen-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    display: none; /* デスクトップでは非表示 */
+}
+body.mode-mobile #mobile-fullscreen-btn {
+    display: block; /* モバイルモード時のみ表示 */
+}
+
+/* --- Unityデフォルトの要素（必要に応じて調整） --- */
+#unity-loading-bar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#unity-logo {
+    width: 154px;
+    height: 130px;
+    background: url('unity-logo-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center;
+}
+
+#unity-progress-bar-empty {
+    width: 141px;
+    height: 18px;
+    margin-top: 10px;
+    margin-left: 6.5px;
+    background: url('progress-bar-empty-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center;
+}
+
+#unity-progress-bar-full {
+    width: 0%;
+    height: 18px;
+    margin-top: 10px;
+    background: url('progress-bar-full-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center;
+}
+
+#unity-footer {
+    position: relative; /* 他の要素との配置基準 */
+    width: 100%; /* フルスクリーン時の中央揃えの影響を受けないように */
+    display: flex; /* フッター内の要素をFlexboxで配置 */
+    justify-content: space-between; /* 左右に配置 */
+    align-items: center;
+    padding: 0 10px; /* 左右に少しパディング */
+    box-sizing: border-box; /* パディングを含めてwidth計算 */
+}
+.unity-mobile #unity-footer {
+    display: none; /* モバイルではフッターを非表示 */
+}
+
+/* モバイルではフッターを隠す */
+.unity-mobile #unity-footer {
+    display: none;
+}
+
+#unity-logo-title-footer {
+    float: left;
+    width: 102px;
+    height: 38px;
+    background: url('unity-logo-title-footer.png') no-repeat center;
+}
+
+#unity-build-title {
+    float: right;
+    margin-right: 10px;
+    line-height: 38px;
+    font-family: arial;
+    font-size: 18px;
+}
+
+#unity-fullscreen-button {
+    cursor: pointer;
+    float: right;
+    width: 38px;
+    height: 38px;
+    background: url('fullscreen-button.png') no-repeat center;
+}
+
+#unity-warning {
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    transform: translate(-50%);
+    background: white;
+    padding: 10px;
+    display: none;
+}

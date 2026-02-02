@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+
+    <style>
+        /* --- html/bodyの基本設定（重要） --- */
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* スクロール防止 */
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #FFFFFF; /* デスクトップは白 */
+            font-family: Arial, Helvetica, sans-serif;
+            
+            /* 中央配置のためのFlexbox */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Unityコンテナの基本設定 --- */
+        #unity-container {
+            position: relative; 
+            width: auto;
+            height: auto;
+            background-color: transparent;
+            display: block;
+        }
+
+        /* --- モバイル専用設定 (JSで付与) --- */
+        body.mode-mobile {
+            background-color: #000000 !important;
+            /* iOSなどでスクロールバウンスを防ぎ、画面内に固定するための設定 */
+            position: fixed; 
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        /* --- モバイルコンテナの装飾 --- */
+        .unity-mobile {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- フルスクリーン時のコンテナ設定 --- */
+        #unity-container:fullscreen,
+        #unity-container:-webkit-full-screen,
+        #unity-container:-moz-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+
+        /* --- キャンバス設定 --- */
+        #unity-canvas {
+            display: block;
+            background: {{{BACKGROUND_COLOR}}};
+            margin: auto; /* コンテナ内で中央に寄せる */
+        }
+
+        /* --- Android用 フルスクリーンボタン --- */
+        #mobile-fullscreen-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            display: none;
+        }
+        body.mode-mobile #mobile-fullscreen-btn {
+            display: block;
+        }
+
+        /* --- iOS用 PWA案内モーダル --- */
+        #ios-pwa-prompt {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 10000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .ios-prompt-box {
+            background: #333;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+        .ios-prompt-close {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #555;
+            color: white;
+            border: 1px solid #777;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+#if SHOW_DIAGNOSTICS
+    <link rel="stylesheet" href="<<<TemplateData/diagnostics.css>>>">
+    <script src="<<<TemplateData/diagnostics.js>>>"></script>
+#endif
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1"></canvas>
+      
+      <div id="mobile-fullscreen-btn">⛶</div>
+      
+      <div id="ios-pwa-prompt">
+        <div class="ios-prompt-box">
+            <p style="font-size:40px; margin:10px">📱</p>
+            <p><b>全画面でプレイするには</b><br>「ホーム画面に追加」してください</p>
+            
+            <p style="font-size:13px; color:#ffcc00; margin:5px 0 15px 0;">
+                ※iOSでの推奨環境はSafariです
+            </p>
+            <p>1. 共有ボタン <span style="font-size:1.2em">📤</span> をタップ</p>
+            <p>2. 「ホーム画面に追加」を選択</p>
+            <button class="ios-prompt-close" onclick="document.getElementById('ios-pwa-prompt').style.display='none'">閉じる</button>
+        </div>
+      </div>
+
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-logo-title-footer"></div>
+        <div id="unity-fullscreen-button"></div>
+#if SHOW_DIAGNOSTICS
+        <img id="diagnostics-icon" src="TemplateData/webmemd-icon.png">
+#endif
+        <div id="unity-build-title">{{{ PRODUCT_NAME }}}</div>
+      </div>
+    </div>
+
+    <script>
+      var canvas = document.querySelector("#unity-canvas");
+      var container = document.querySelector("#unity-container");
+
+      function unityShowBanner(msg, type) {
+        var warningBanner = document.querySelector("#unity-warning");
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      // ▼▼▼ 16:9比率維持ロジック (モバイル・PCフルスクリーン共通) ▼▼▼
+      function applyMobileAspectRatio() {
+        if (!container || !canvas) return;
+
+        var isFullscreen = document.fullscreenElement || 
+                           document.webkitFullscreenElement || 
+                           document.mozFullScreenElement || 
+                           document.msFullscreenElement;
+
+        // 現在のブラウザ表示領域
+        var viewportWidth = window.innerWidth;
+        var viewportHeight = window.innerHeight;
+        var targetRatio = 16 / 9; 
+        var newWidth, newHeight;
+
+        // 表示領域に合わせて最大化計算
+        if (viewportWidth / viewportHeight > targetRatio) {
+            newHeight = viewportHeight; 
+            newWidth = newHeight * targetRatio;
+        } else {
+            newWidth = viewportWidth;
+            newHeight = newWidth / targetRatio;
+        }
+
+        if (isFullscreen) {
+            // フルスクリーン時：コンテナを画面一杯にし、キャンバスを計算サイズに
+            container.style.width = "100vw";
+            container.style.height = "100vh";
+            canvas.style.width = newWidth + "px";
+            canvas.style.height = newHeight + "px";
+        } else {
+            // モバイルモードの通常時は常に比率固定
+            if(document.body.classList.contains("mode-mobile")){
+                container.style.width = newWidth + "px";
+                container.style.height = newHeight + "px";
+                canvas.style.width = "100%";
+                canvas.style.height = "100%";
+            }
+        }
+      }
+
+      // ▼▼▼ PC用 通常時リサイズ関数 ▼▼▼
+      function fitWindowCanvasSize(){
+        // フルスクリーン中は applyMobileAspectRatio に任せる
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            applyMobileAspectRatio();
+            return;
+        }
+
+        // ★ここが重要: PC通常時はコンテナの強制サイズ指定を解除する
+        if(container) {
+            container.style.width = "";
+            container.style.height = "";
+        }
+
+        var winHeight = window.innerHeight;
+        const isViewUnderBar = true;
+        if (isViewUnderBar){
+          const barHeight = 18*2;
+          const barHeightMargin = 10*2;
+          winHeight = winHeight - barHeight - barHeightMargin;
+        }
+        const winWidth = window.innerWidth;
+        const appWidth = "{{{ WIDTH }}}";
+        const appHeight = "{{{ HEIGHT }}}";
+        const scale = Math.min((winWidth / appWidth), (winHeight / appHeight));
+        const fixWidth = (appWidth * scale);
+        const fixHeight = (appHeight * scale);
+
+        canvas.style.width = fixWidth + 'px';
+        canvas.style.height = fixHeight + 'px';
+      }
+
+      function windowResizeEvent(){
+        var timeoutId = 0;
+        const resizeDelay = 300;
+        window.onresize = () => {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(()=>{
+            var isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+            if(isFullscreen) {
+                applyMobileAspectRatio();
+            } else {
+                fitWindowCanvasSize();
+            }
+          }, resizeDelay);
+        };
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      var config = {
+        arguments: [],
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+#if USE_THREADS
+        workerUrl: buildUrl + "/{{{ WORKER_FILENAME }}}",
+#endif
+#if USE_WASM
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+        productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+        productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+        showBanner: unityShowBanner,
+      };
+
+      // ▼▼▼ デバイス判定と分岐 ▼▼▼
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // ===============================================
+        // モバイル端末の場合
+        // ===============================================
+        document.body.classList.add("mode-mobile");
+        document.querySelector("#unity-container").className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        function delayedResize() {
+            setTimeout(applyMobileAspectRatio, 200); 
+        }
+
+        applyMobileAspectRatio();
+        window.addEventListener('resize', delayedResize);
+        document.addEventListener('fullscreenchange', delayedResize);
+        document.addEventListener('webkitfullscreenchange', delayedResize);
+
+        var dpr = window.devicePixelRatio || 1;
+        var screenHeight = Math.min(window.innerWidth, window.innerHeight);
+        var maxRenderHeight = 1080;
+        if (screenHeight * dpr > maxRenderHeight) {
+            dpr = maxRenderHeight / screenHeight;
+        }
+        config.devicePixelRatio = dpr;
+
+        // --- フルスクリーンボタン (Mobile) ---
+        var fsButton = document.getElementById("mobile-fullscreen-btn");
+        if(fsButton) {
+            fsButton.addEventListener('click', function() {
+                 if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    var promise = null;
+                    if (container.requestFullscreen) promise = container.requestFullscreen();
+                    else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+
+                    if (promise) {
+                        promise.then(function() {
+                            if (screen.orientation && screen.orientation.lock) {
+                                screen.orientation.lock('landscape').catch(console.log);
+                            }
+                        }).catch(console.log);
+                    }
+                } else {
+                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                    if (document.exitFullscreen) document.exitFullscreen();
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                }
+            });
+        }
+
+        var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        var isStandalone = window.navigator.standalone || (window.matchMedia('(display-mode: standalone)').matches);
+        if (isIOS) {
+            if(fsButton) fsButton.style.display = 'none';
+            if (!isStandalone) {
+                setTimeout(function() {
+                    document.getElementById('ios-pwa-prompt').style.display = 'flex';
+                }, 1500);
+            }
+        }
+
+#if SHOW_DIAGNOSTICS
+        let diagnostics_icon = document.getElementById("diagnostics-icon");
+        if(diagnostics_icon){
+            diagnostics_icon.style.position = "fixed";
+            diagnostics_icon.style.bottom = "10px";
+            diagnostics_icon.style.right = "0px";
+            canvas.after(diagnostics_icon);
+        }
+#endif
+
+      } else {
+        // ===============================================
+        // PC（デスクトップ）の場合
+        // ===============================================
+        fitWindowCanvasSize();
+        windowResizeEvent();
+
+        // ▼▼▼ フルスクリーン切り替え時のハンドラ ▼▼▼
+        function onDesktopFullscreenChange() {
+            var isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+            if (isFullscreen) {
+                // フルスクリーン開始: モバイル同様の比率固定ロジックを適用
+                setTimeout(applyMobileAspectRatio, 100);
+            } else {
+                // フルスクリーン解除: 元のレイアウトに戻す
+                
+                // 1. コンテナに付与された強制サイズ(100vw/100vh)を削除
+                if(container) {
+                    container.style.width = "";
+                    container.style.height = "";
+                }
+                
+                // 2. 元のリサイズ関数を呼んでキャンバスサイズを復元
+                setTimeout(fitWindowCanvasSize, 100);
+            }
+        }
+
+        document.addEventListener('fullscreenchange', onDesktopFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onDesktopFullscreenChange);
+      }
+
+#if BACKGROUND_FILENAME
+      canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
+#endif
+      document.querySelector("#unity-loading-bar").style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
+              }).then((unityInstance) => {
+                document.querySelector("#unity-loading-bar").style.display = "none";
+#if SHOW_DIAGNOSTICS
+                document.getElementById("diagnostics-icon").onclick = () => {
+                  unityDiagnostics.openDiagnosticsDiv(unityInstance.GetMetricsInfo);
+                };
+#endif
+                // PC版フルスクリーンボタン
+                document.querySelector("#unity-fullscreen-button").onclick = () => {
+                  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                      if (container.requestFullscreen) container.requestFullscreen();
+                      else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+                  } else {
+                      if (document.exitFullscreen) document.exitFullscreen();
+                      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                  }
+                };
+#if DEVELOPMENT_PLAYER
+                var quit = document.createElement("button");
+                quit.style = "margin-left: 5px; background-color: lightgray; border: none; padding: 5px; cursor: pointer";
+                quit.innerHTML = "Unload";
+                document.querySelector("#unity-build-title").appendChild(quit);
+                quit.onclick = () => {
+                  unityInstance.Quit().then(() => {
+                    document.querySelector("#unity-container").remove();
+                    canvas = null;
+                    script.remove();
+                    script = null;
+                  });
+                };
+#endif
+              }).catch((message) => {
+                alert(message);
+              });
+            };
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>
