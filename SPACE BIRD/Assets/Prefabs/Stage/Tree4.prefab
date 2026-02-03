@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 3343402238269581707, guid: 61091997a2e6c054cafbd79515950a8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,10 +104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: -0.04
-  cloneStartPoint: 0
-  destroyPoint: 0
-  clonePoint: 0
-  nearObject: {fileID: 0}
+  cloneStartPoint: 11.34
+  destroyPoint: 12
+  clonePoint: -11.34
+  nearObject: {fileID: 5707084645757808539}
   stageObject: {fileID: 0}
 --- !u!1001 &954792237656588841
 PrefabInstance:

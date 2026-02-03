@@ -102,10 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: -0.02
-  cloneStartPoint: 0
-  destroyPoint: 0
-  clonePoint: 0
-  nearObject: {fileID: 0}
+  cloneStartPoint: 11.23
+  destroyPoint: 12
+  clonePoint: -11.23
+  nearObject: {fileID: 7113987777015346872}
   stageObject: {fileID: 0}
 --- !u!1001 &5931891662056518270
 PrefabInstance:
