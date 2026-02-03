@@ -3,26 +3,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static string playerState = "alive";
-    public static bool isSpecial = false;
-    public static bool isEnemyDestory = false;
+    public static string playerState = "alive";     //プレイヤーの状態(alive, miss, recovery)
+    public static bool isSpecial = false;   //スペシャル攻撃フラグ(ボム攻撃フラグ)
+    public static bool isEnemyDestory = false;  //敵破壊フラグ（スペシャル攻撃用）
 
-    public float baseSpeed = 3.0f;
-    public float slowSpeed = 1.0f;
+    public float baseSpeed = 3.0f;  //移動速度（通常）
+    public float slowSpeed = 1.0f;  //移動速度（スロー）
+
+    //移動範囲制限
     public float UpLimit;
     public float DownLimit;
     public float LeftLimit;
     public float RightLimit;
 
-    private float speed;
-    private Rigidbody2D rbody;
-    private float axisH;
-    private float axisV;
-    private bool isSlow = false;
-    private bool isMoving = false;
-    private Animator animator;
-    private int clickCnt = 0;
-    private Vector3 currentPos;
+    private float speed;    //移動速度切替用
+    private Rigidbody2D rbody;  //物理演算用
+    private float axisH;    //入力用変数（水平）
+    private float axisV;    //入力用変数（垂直）
+    private bool isSlow = false;    //スロー移動フラグ
+    private bool isMoving = false;  //タッチ操作フラグ
+    private Animator animator;  //アニメーター(アニメーションの遷移を管理)
+    private int clickCnt = 0;   //クリック回数（ダブルクリック用）
+    private Vector3 currentPos; //プレイヤーの現在の座標（スペシャル攻撃用）
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -134,6 +136,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //------------------------------タッチ操作関係のメソッド（マウスカーソル操作と共通）------------------------------------------------
+
     void OnMouseDrag()
     {
         if (GameManager.gameState != "playing" || playerState == "miss") return;
@@ -150,7 +154,6 @@ public class PlayerController : MonoBehaviour
         PlayerShoot.isPlayerTouch = false;
         isMoving = false;
     }
-
 
     void OnMouseDown()
     {
@@ -176,4 +179,6 @@ public class PlayerController : MonoBehaviour
             animator.Play("Bomb");
         }
     }
+
+    //-------------------------------------------------------------------------------------------------
 }
