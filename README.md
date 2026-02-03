@@ -25,5 +25,6 @@ IE24 Circus 卒業制作「レトロ風２Ｄシューティングゲーム」
 >https://ie24-sotsuseti.web.app
 
 ## 連絡先
+このリポジトリ、プロジェクトに関して質問・改善などがある場合はお気軽にご連絡ください。
 メール（代表　寺岡）：
 >teraokatakeru@gmail.com
