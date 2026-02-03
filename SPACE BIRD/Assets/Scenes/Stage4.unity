@@ -703,6 +703,7 @@ GameObject:
   - component: {fileID: 1035244914}
   - component: {fileID: 1035244916}
   - component: {fileID: 1035244915}
+  - component: {fileID: 1035244917}
   m_Layer: 0
   m_Name: Rock_Top
   m_TagString: Untagged
@@ -798,6 +799,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1035244917
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035244913}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3528ce306155db343ad63fcd6793d1d4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1047014565 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4124648770814832366, guid: 10c84203d0e18484b94f6fbece81019a, type: 3}
@@ -2428,6 +2451,7 @@ GameObject:
   - component: {fileID: 6709223273537140994}
   - component: {fileID: 2440976430071266458}
   - component: {fileID: 1015156588421535748}
+  - component: {fileID: 7905296801382761194}
   m_Layer: 0
   m_Name: Rock_Bottom
   m_TagString: Untagged
@@ -2435,6 +2459,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &7905296801382761194
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7905296801382761193}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f505b1a16bc1cb4b987f6093bdfe08f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8370989885644554345
 PrefabInstance:
   m_ObjectHideFlags: 0
