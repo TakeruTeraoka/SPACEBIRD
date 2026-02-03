@@ -9,23 +9,24 @@ IE24 Circus 卒業制作「レトロ風２Ｄシューティングゲーム」
 このリポジトリ（Unityプロジェクト）は、 **Unity 6000.0.63f1**によって作成されました。
 プロジェクトの解析等を行う場合は、同バージョンのエディターをUnity Hubにインストールしてお使いください。
 なお、このリポジトリ内に含まれている画像素材・ソースコードは***自由に使用・改変・再配布***してもらって構いません。
-（知っている方もいると思いますが、一応リポジトリを完全にコピーして使用したい場合は必ず**Fork**を選んでください >https://www.kagoya.jp/howto/rentalserver/webtrend/githubfork/)
+（知っている方もいると思いますが、一応リポジトリを完全にコピーして使用したい場合は必ず**Fork**を選んでください 
+参考：https://www.kagoya.jp/howto/rentalserver/webtrend/githubfork/)
 
 ## MyDefaultTempleteについて
 こちらのフォルダにはUnityのWebGLテンプレートが含まれており、PC・スマホ問わず使用できます。※一応Chrome, Edge, Safari(iOS 15以降に搭載されている)などで動作確認していますが、動作を保証するものではありません。使用する場合は
 
->https://qiita.com/mao_/items/6bdd988b10f2754a6d56
+> https://qiita.com/mao_/items/6bdd988b10f2754a6d56
 
 を参考にフォルダの配置・設定を行ってください。（エディターのバージョン違いで実際の画面と異なる可能性があります。）
 ※自身のプロジェクトに使う場合は**favicon.ico**を変更してください
 
 ## ゲームのサンプル
 * ゲーム本体
->https://spacebird-ie24.web.app
+> https://spacebird-ie24.web.app
 * 紹介サイト（開発資料集など）
->https://ie24-sotsuseti.web.app
+> https://ie24-sotsuseti.web.app
 
 ## 連絡先
 このリポジトリ、プロジェクトに関して質問・改善などがある場合はお気軽にご連絡ください。
 メール（代表　寺岡）：
->teraokatakeru@gmail.com
+> teraokatakeru@gmail.com
