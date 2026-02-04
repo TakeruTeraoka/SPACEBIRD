@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     private bool isGameOCMove = false;
 
     private bool isGameOCButtonSwitched = false;    //ゲームオーバー・クリアパネルのボタン表示切替フラグ
+    private bool isGameClearPanelSwitched = false;  //ゲームクリアパネル表示切替フラグ
     private bool isStageClearPanelSwitched = false; //ステージクリアパネル表示切替フラグ
     private string selectButton = "continue";   //選択されているボタン
     private string gameOCSelectButton = "continue"; //ゲームオーバー・クリアパネルの選択されているボタン
@@ -134,7 +135,14 @@ public class GameManager : MonoBehaviour
                 GamePause();
                 break;
             case "gameover":
+                GameOver();
+                break;
             case "gameclear":
+                if (!isGameClearPanelSwitched)
+                {
+                    isGameClearPanelSwitched = true;
+                    SwitchPanel();
+                }
                 GameOver();
                 break;
             case "stageclear":

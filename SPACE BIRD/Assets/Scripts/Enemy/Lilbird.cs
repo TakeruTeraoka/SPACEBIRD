@@ -5,7 +5,9 @@ public class Lilbird : EnemyBase
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        hp = 2;
+        hp = 3;
+        enemyScore = 25;
+        enemyAnimator = this.GetComponent<Animator>();
         speed = this.GetComponent<Animator>().speed;    //現在設定されているアニメーションの速度を取得
     }
 

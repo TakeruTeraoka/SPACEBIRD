@@ -1,20 +1,18 @@
 using UnityEngine;
 
-public class Boss1 : EnemyBase
+public class Boss3 : EnemyBase
 {
-    public float span = 2.0f; //発射間隔
-    public GameObject bossBulletPoint;  //ボスの発射ポイント
-    public GameObject lillBird;
+    public float span = 3.0f;   //攻撃間隔
 
     private float delta = 0;    //加算用変数
-    private bool isSpecial = false; //敵を飛ばしたかどうかを管理するフラグ
-    private Transform[] bossBulletPoints = new Transform[3];    //ボスの発射ポイント（複数）
+    private bool isSpecial = false; //攻撃用フラグ
+    private string[] attacks = { "Desert", "Noize", "Drop" };
 
-    private void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        bossBulletPoints = bossBulletPoint.GetComponentsInChildren<Transform>();
         hp = 100;
-        enemyScore = 50;
+        enemyScore = 80;
         enemyAnimator = this.GetComponent<Animator>();
         speed = this.GetComponent<Animator>().speed;
     }
@@ -41,7 +39,7 @@ public class Boss1 : EnemyBase
                 //加算用変数を０に戻す
                 delta = 0;
                 //攻撃処理
-                Attack();
+                enemyAnimator.Play("Attack");
             }
             else
             {
@@ -51,15 +49,24 @@ public class Boss1 : EnemyBase
         }
     }
 
-    //攻撃
     public void Attack()
     {
         //特別攻撃
         if (isSpecial)
         {
-            Debug.Log("特別攻撃");
-            //Attackアニメーションを再生
-            enemyAnimator.Play("Attack");
+            int ran = Random.Range(0, attacks.Length);
+            switch (attacks[ran])
+            {
+                case "Desert":
+                    //下から砂を隆起させる
+                    break;
+                case "Noize":
+                    //砂嵐をオンにして敵を横から飛ばす
+                    break;
+                case "Drop":
+                    //上から物理演算で敵を落とす
+                    break;
+            }
         }
 
         isSpecial = !isSpecial; //フラグを反転
@@ -68,15 +75,5 @@ public class Boss1 : EnemyBase
     public void PlayStopAnime()
     {
         enemyAnimator.Play("Stop");
-    }
-
-
-    public void BossBulletShot()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject cloneObject = Instantiate(lillBird, bossBulletPoints[i].transform.position, Quaternion.Euler(0, 180, 0));
-            cloneObject.name = "LillBird";
-        }
     }
 }
