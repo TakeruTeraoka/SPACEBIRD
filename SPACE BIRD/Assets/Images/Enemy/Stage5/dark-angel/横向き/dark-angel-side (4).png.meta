@@ -122,9 +122,9 @@ TextureImporter:
         x: 11
         y: 201
         width: 708
-        height: 264
+        height: 413
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -137,33 +137,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: dark-angel-side (4)_1
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 433
-        width: 472
-        height: 186
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ec59ff6792ccca930800000000000000
-      internalID: 4155921034618312142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 38692996786dd5d4bac1dc352ca8f66d
     internalID: 0
     vertices: []
     indices: 

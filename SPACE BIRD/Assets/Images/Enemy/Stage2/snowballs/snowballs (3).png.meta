@@ -122,81 +122,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: snowballs (3)_0
-      rect:
-        serializedVersion: 2
-        x: 245
-        y: 404
-        width: 124
-        height: 123
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 398de6dddcbeca580800000000000000
-      internalID: -8814411101255051117
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (3)_1
-      rect:
-        serializedVersion: 2
-        x: 389
-        y: 421
-        width: 124
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 284a18d3405146e40800000000000000
-      internalID: 5648662940585403522
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (3)_2
-      rect:
-        serializedVersion: 2
-        x: 222
-        y: 259
-        width: 125
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c7a8cffa177cb0c00800000000000000
-      internalID: 868006644296747644
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: snowballs (3)_3
       rect:
         serializedVersion: 2
-        x: 358
-        y: 202
-        width: 209
-        height: 208
+        x: 230
+        y: 209
+        width: 329
+        height: 334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

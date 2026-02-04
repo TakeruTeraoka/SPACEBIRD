@@ -122,81 +122,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: snowballs (5)_0
-      rect:
-        serializedVersion: 2
-        x: 225
-        y: 372
-        width: 124
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 825a7cab0112bf7c0800000000000000
-      internalID: -4036596285270678232
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (5)_1
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 425
-        width: 124
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63a85cd8252e642e0800000000000000
-      internalID: -2141775728574363082
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (5)_2
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 308
-        width: 124
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 187196e22c268f140800000000000000
-      internalID: 4753657992831375233
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: snowballs (5)_3
       rect:
         serializedVersion: 2
-        x: 243
+        x: 232
         y: 194
-        width: 239
-        height: 156
+        width: 337
+        height: 351
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

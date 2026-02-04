@@ -124,10 +124,10 @@ TextureImporter:
         serializedVersion: 2
         x: 37
         y: 201
-        width: 452
-        height: 236
+        width: 687
+        height: 417
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -140,55 +140,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: dark-angel-side (2)_1
-      rect:
-        serializedVersion: 2
-        x: 97
-        y: 433
-        width: 472
-        height: 186
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2b159296d2c9a8c40800000000000000
-      internalID: 5515392412520370610
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dark-angel-side (2)_2
-      rect:
-        serializedVersion: 2
-        x: 487
-        y: 337
-        width: 236
-        height: 154
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 55fb62a03013698a0800000000000000
-      internalID: -6298793139706085547
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7e7eddf4869ca564ab027924def365ea
     internalID: 0
     vertices: []
     indices: 

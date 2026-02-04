@@ -127,10 +127,10 @@ TextureImporter:
         serializedVersion: 2
         x: 229
         y: 89
-        width: 384
-        height: 400
+        width: 405
+        height: 410
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -143,77 +143,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: crystal-element (3)_1
-      rect:
-        serializedVersion: 2
-        x: 433
-        y: 461
-        width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 334fe8b4c68f26370800000000000000
-      internalID: 8314481006087173171
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: crystal-element (3)_2
-      rect:
-        serializedVersion: 2
-        x: 585
-        y: 451
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fd9ebd8a809e20190800000000000000
-      internalID: -7997573764854584865
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: crystal-element (3)_3
-      rect:
-        serializedVersion: 2
-        x: 603
-        y: 319
-        width: 16
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 27b097c163a0e5b90800000000000000
-      internalID: -7251347122497713294
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ae24473fb9157244e9df4cd0dcafd51e
     internalID: 0
     vertices: []
     indices: 

@@ -119,12 +119,12 @@ TextureImporter:
       name: alien (4)_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 21
+        x: 21
+        y: 36
         width: 724
         height: 704
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -137,33 +137,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: alien (4)_1
-      rect:
-        serializedVersion: 2
-        x: 743
-        y: 209
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ff6d5fcc521c29870800000000000000
-      internalID: 8688218999247722239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6f1da4ac56c009240bee159c8637a60a
     internalID: 0
     vertices: []
     indices: 

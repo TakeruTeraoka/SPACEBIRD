@@ -125,59 +125,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: frozen-element (2)_0
-      rect:
-        serializedVersion: 2
-        x: 489
-        y: 451
-        width: 58
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2f50345e1463e5e20800000000000000
-      internalID: 3341167630202635762
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-element (2)_1
-      rect:
-        serializedVersion: 2
-        x: 185
-        y: 343
-        width: 62
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 23402270e2c7b6080800000000000000
-      internalID: -9193117677216725966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: frozen-element (2)_2
       rect:
         serializedVersion: 2
-        x: 233
-        y: 109
-        width: 360
-        height: 336
+        x: 188
+        y: 52
+        width: 410
+        height: 462
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -186,50 +142,6 @@ TextureImporter:
       bones: []
       spriteID: 14776d239db380ba0800000000000000
       internalID: -6122577889363331263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-element (2)_3
-      rect:
-        serializedVersion: 2
-        x: 221
-        y: 95
-        width: 62
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7ef5a2afac5e52da0800000000000000
-      internalID: -5970113071066488857
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-element (2)_4
-      rect:
-        serializedVersion: 2
-        x: 491
-        y: 53
-        width: 62
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6b01b646b585730c0800000000000000
-      internalID: -4596107745158295370
       vertices: []
       indices: 
       edges: []

@@ -119,37 +119,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gear (2)_0
-      rect:
-        serializedVersion: 2
-        x: 343
-        y: 565
-        width: 190
-        height: 184
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: df92ddeda33bdc300800000000000000
-      internalID: 274072217767979517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: gear (2)_1
       rect:
         serializedVersion: 2
         x: 211
-        y: 201
+        y: 15
         width: 364
-        height: 360
+        height: 734
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,33 +140,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: gear (2)_2
-      rect:
-        serializedVersion: 2
-        x: 255
-        y: 15
-        width: 190
-        height: 184
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a756893304af29fc0800000000000000
-      internalID: -3489451607608236678
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 61e662754ea644547ab43662aa968527
     internalID: 0
     vertices: []
     indices: 

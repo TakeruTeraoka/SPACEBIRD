@@ -23,8 +23,8 @@ public class EnemyBase : MonoBehaviour
                     if (!isSpecialHit)
                     {
                         isSpecialHit = true;
+                        GameManager.subBossHp = (int)(hp * 0.3);
                         hp = (int)(hp * 0.7);
-                        Debug.Log(gameObject.name + ":" + hp);
                     }
                     break;
             }
@@ -48,6 +48,11 @@ public class EnemyBase : MonoBehaviour
         {
             hp--;   //HPÇ1å∏ÇÁÇ∑
 
+            if (gameObject.tag == "Boss")
+            {
+                GameManager.subBossHp = 1;
+            }
+
             //HPÇ™ÇOà»â∫Ç…Ç»Ç¡ÇΩèÍçá
             if (hp <= 0)
             {
@@ -68,5 +73,10 @@ public class EnemyBase : MonoBehaviour
     public void StageClear()
     {
         GameManager.gameState = "stageclear";
+    }
+
+    public void GameClear()
+    {
+        GameManager.gameState = "gameclear";
     }
 }

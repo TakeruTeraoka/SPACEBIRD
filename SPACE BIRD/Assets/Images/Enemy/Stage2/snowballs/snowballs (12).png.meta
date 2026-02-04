@@ -122,37 +122,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: snowballs (12)_0
-      rect:
-        serializedVersion: 2
-        x: 213
-        y: 382
-        width: 125
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 657c2db23deb7f430800000000000000
-      internalID: 3816729023402395478
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: snowballs (12)_1
       rect:
         serializedVersion: 2
-        x: 349
-        y: 351
-        width: 208
-        height: 209
+        x: 225
+        y: 222
+        width: 324
+        height: 331
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -161,50 +139,6 @@ TextureImporter:
       bones: []
       spriteID: ebb0bde6f253ee6a0800000000000000
       internalID: -6418133941116793922
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (12)_2
-      rect:
-        serializedVersion: 2
-        x: 232
-        y: 238
-        width: 123
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6cf04f06c12f0f8a0800000000000000
-      internalID: -6273248077227487290
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (12)_3
-      rect:
-        serializedVersion: 2
-        x: 375
-        y: 215
-        width: 125
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ebb16a55f587c4250800000000000000
-      internalID: 5930247160194276286
       vertices: []
       indices: 
       edges: []

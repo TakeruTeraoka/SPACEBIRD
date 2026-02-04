@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static string gameState = "";    //ゲームの状態
     public static int totalScore = 0;   //合計スコア
     public static int addScore = 0;     //加算するスコア
+    public static int subBossHp = 0;    //減算するボスの体力
     public static int zanki = 5;        //残機
     public static int addZanki = 0;     //加算する残機（マイナスを含む）
     public static bool isChargeMax = false;  //ボムチャージ完了フラグ
@@ -44,12 +46,14 @@ public class GameManager : MonoBehaviour
     public GameObject gameOCArrow_L;
     public GameObject gameOCArrow_R;
     public CountScore countScore;
+    public Slider bossHpMeter;
 
     public string nextSceneName = "";   //次にロードされるシーン名
     public bool isDebug = false;    //デバッグ切替用
     public string currentStage = ""; //現在のステージ名
     public bool isScrollStopOn = false; //ステージのスクロール停止のオンオフ管理フラグ
 
+    private GameObject boss;
     private int score = 0;  //スコア
     private float delta = 0;    //加算用変数
 
@@ -61,7 +65,7 @@ public class GameManager : MonoBehaviour
     private bool isStageClearPanelSwitched = false; //ステージクリアパネル表示切替フラグ
     private string selectButton = "continue";   //選択されているボタン
     private string gameOCSelectButton = "continue"; //ゲームオーバー・クリアパネルの選択されているボタン
-
+    private bool isBossHpMeterMax = false;  //ボスの体力メーターが満タンになったかを管理するフラグ
 
     private ChangeScene changeScene;    //シーン切替フラグ
     private Transform[] chargeMeters = new Transform[7];    //ボムチャージメーター×６（取得する際、親オブジェクトも同時に取得するため７枠）
@@ -89,6 +93,8 @@ public class GameManager : MonoBehaviour
         chargeMeters = specialPanel.GetComponentsInChildren<Transform>();
         animators = specialPanel.GetComponentsInChildren<Animator>();
         names = gameOCNames.GetComponentsInChildren<Transform>();
+        boss = GameObject.FindGameObjectWithTag("Boss");
+        bossHpMeter.gameObject.SetActive(false);
 
         //ボムチャージメーターをすべて非表示に設定
         foreach (Transform meter in chargeMeters)
@@ -139,6 +145,19 @@ public class GameManager : MonoBehaviour
                 }
                 StageClear();
                 break;
+        }
+
+        if (boss.GetComponent<Renderer>().isVisible)
+        {
+            if (!isBossHpMeterMax)
+            {
+                bossHpMeter.gameObject.SetActive(true);
+                StartCoroutine(InitBossHpMeter());
+            }
+            else if (isBossHpMeterMax && subBossHp != 0 && bossHpMeter.value >= bossHpMeter.minValue)
+            {
+                ChangeBossHpMeter();
+            }
         }
     }
 
@@ -288,6 +307,8 @@ public class GameManager : MonoBehaviour
                     {
                         zanki = 5;
                     }
+                    addScore = 0;
+                    subBossHp = 0;
                     changeScene.SceneName = currentStage;
                     changeScene.Load();
                     break;
@@ -471,6 +492,8 @@ public class GameManager : MonoBehaviour
                     case "continue":
                         isScrollStop = false;
                         zanki = 5;
+                        addScore = 0;
+                        subBossHp = 0;
                         changeScene.SceneName = currentStage;
                         break;
 
@@ -648,6 +671,8 @@ public class GameManager : MonoBehaviour
         else if (gameState == "gameclear")
         {
             InitGame();
+            changeScene.SceneName = "Title";
+            changeScene.Load();
             Debug.Log("Playing Movie_en");
         }
     }
@@ -753,6 +778,7 @@ public class GameManager : MonoBehaviour
     {
         isScrollStop = false;
         addScore = 0;
+        subBossHp = 0;
         if (stageNum != 5)
         {
             stageNum++;
@@ -763,6 +789,33 @@ public class GameManager : MonoBehaviour
     }
 
     //---------------------------------------------------------------------------------------------------------------
+
+    public IEnumerator InitBossHpMeter()
+    {
+        while (bossHpMeter.value <= bossHpMeter.maxValue)
+        {
+            if (bossHpMeter.value == bossHpMeter.maxValue)
+            {
+                isBossHpMeterMax = true;
+                yield break;
+            }
+            bossHpMeter.value += 0.001f;
+            yield return null;
+        }
+    }
+
+    public void ChangeBossHpMeter()
+    {
+        if (bossHpMeter.value <= bossHpMeter.minValue)
+        {
+            bossHpMeter.gameObject.SetActive(false);
+        }
+        else
+        {
+            bossHpMeter.value -= subBossHp * 0.01f;
+            subBossHp = 0;
+        }
+    }
 
     //デバッグ処理
     public void DebugFunc(bool b)
@@ -803,6 +856,11 @@ public class GameManager : MonoBehaviour
                     PlayerPrefs.SetString("Name" + i.ToString(), "???");
                 }
             }
+            Debug.Log("PlayerPrefs Delete All!");
+        }
+        else if (Input.GetKeyDown(KeyCode.T) && gameState == "playing")
+        {
+            subBossHp = 10;
         }
     }
 }

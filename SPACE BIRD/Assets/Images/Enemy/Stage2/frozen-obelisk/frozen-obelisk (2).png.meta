@@ -137,103 +137,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: frozen-obelisk (2)_0
-      rect:
-        serializedVersion: 2
-        x: 243
-        y: 451
-        width: 84
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e56740056c2fa1670800000000000000
-      internalID: 8510381379429889630
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-obelisk (2)_1
-      rect:
-        serializedVersion: 2
-        x: 329
-        y: 445
-        width: 112
-        height: 224
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 31ac9562ea2044cd0800000000000000
-      internalID: -2574930139958097389
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-obelisk (2)_2
-      rect:
-        serializedVersion: 2
-        x: 441
-        y: 451
-        width: 84
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f95065210ee609680800000000000000
-      internalID: -8750372167321516641
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-obelisk (2)_3
-      rect:
-        serializedVersion: 2
-        x: 101
-        y: 329
-        width: 226
-        height: 114
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0a2d843deab5a6a10800000000000000
-      internalID: 1903434598944658080
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: frozen-obelisk (2)_4
       rect:
         serializedVersion: 2
-        x: 332
-        y: 320
-        width: 104
-        height: 119
+        x: 102
+        y: 82
+        width: 568
+        height: 591
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -242,94 +154,6 @@ TextureImporter:
       bones: []
       spriteID: a31b6d8fef90dc8d0800000000000000
       internalID: -2824590400590270150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-obelisk (2)_5
-      rect:
-        serializedVersion: 2
-        x: 447
-        y: 329
-        width: 226
-        height: 114
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8895ac1aecf1510c0800000000000000
-      internalID: -4605740071578347128
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-obelisk (2)_6
-      rect:
-        serializedVersion: 2
-        x: 243
-        y: 233
-        width: 84
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00d58bc25e932a720800000000000000
-      internalID: 2855908770166889728
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-obelisk (2)_7
-      rect:
-        serializedVersion: 2
-        x: 329
-        y: 83
-        width: 112
-        height: 224
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ece013fea781c56c0800000000000000
-      internalID: -4153417840064393522
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frozen-obelisk (2)_8
-      rect:
-        serializedVersion: 2
-        x: 441
-        y: 233
-        width: 84
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e68b189ad29adf7b0800000000000000
-      internalID: -5188805182078470034
       vertices: []
       indices: 
       edges: []

@@ -12,7 +12,6 @@ public class Lilbird : EnemyBase
     // Update is called once per frame
     void Update()
     {
-
         //ゲームの状態がプレイ中でない時
         if (GameManager.gameState != "playing")
         {
@@ -21,5 +20,7 @@ public class Lilbird : EnemyBase
             return;
         }
         this.GetComponent<Animator>().speed = speed;   //元の速度に戻す
+
+        transform.Translate(-0.16f, 0, 0);
     }
 }

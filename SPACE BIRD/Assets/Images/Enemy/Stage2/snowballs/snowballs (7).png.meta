@@ -126,11 +126,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 207
-        y: 223
-        width: 152
-        height: 238
+        y: 212
+        width: 345
+        height: 333
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -139,72 +139,6 @@ TextureImporter:
       bones: []
       spriteID: f996ba886bc140ea0800000000000000
       internalID: -5907565240900687457
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (7)_1
-      rect:
-        serializedVersion: 2
-        x: 323
-        y: 427
-        width: 124
-        height: 122
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 50f36ade8f3f28380800000000000000
-      internalID: -8970339257304072443
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (7)_2
-      rect:
-        serializedVersion: 2
-        x: 437
-        y: 337
-        width: 122
-        height: 122
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6b54d6d6ab71478d0800000000000000
-      internalID: -2849626574751447626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: snowballs (7)_3
-      rect:
-        serializedVersion: 2
-        x: 381
-        y: 203
-        width: 122
-        height: 122
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2a7a8da5eddc7f180800000000000000
-      internalID: -9081563768678733918
       vertices: []
       indices: 
       edges: []

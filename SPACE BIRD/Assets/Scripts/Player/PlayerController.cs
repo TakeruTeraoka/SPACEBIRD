@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.addZanki = -1;
             rbody.linearVelocity = Vector2.zero;
+            isSlow = false;
             playerState = "miss";
             animator.Play("Miss");
         }
