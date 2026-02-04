@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class Boss1 : EnemyBase
 {
-    //public GameObject hpMeter;
+    //public GameObject hpMeter;    //HPメーター
     public float span = 2.0f; //発射間隔
+    public GameObject bossBulletPoint;  //ボスの発射ポイント
 
     private float delta = 0;    //加算用変数
     private bool isSpecial = false; //敵を飛ばしたかどうかを管理するフラグ
+    private Transform[] bossBulletPoints = new Transform[3];    //ボスの発射ポイント（複数）
 
     private void Start()
     {
+        bossBulletPoints = bossBulletPoint.GetComponentsInChildren<Transform>();
         //hpMeter.SetActive(false);
         hp = 100;
         enemyScore = 50;
