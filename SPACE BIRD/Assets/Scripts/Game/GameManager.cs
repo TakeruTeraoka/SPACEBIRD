@@ -310,13 +310,7 @@ public class GameManager : MonoBehaviour
                     SwitchPanel();
                     break;
                 case "restart":
-                    isScrollStop = false;
-                    if (zanki < 5)
-                    {
-                        zanki = 5;
-                    }
-                    addScore = 0;
-                    subBossHp = 0;
+                    ResetGame(1);
                     changeScene.SceneName = currentStage;
                     changeScene.Load();
                     break;
@@ -498,10 +492,7 @@ public class GameManager : MonoBehaviour
                 switch (gameOCSelectButton)
                 {
                     case "continue":
-                        isScrollStop = false;
-                        zanki = 5;
-                        addScore = 0;
-                        subBossHp = 0;
+                        ResetGame(0);
                         changeScene.SceneName = currentStage;
                         break;
 
@@ -663,6 +654,29 @@ public class GameManager : MonoBehaviour
         charge = 0;
         isChargeMax = false;
         isScrollStop = false;
+    }
+
+    //コンティニュー時にstatic変数を初期化する
+    public void ResetGame(int mode)
+    {
+        switch (mode)
+        {
+            case 0:
+                isScrollStop = false;
+                zanki = 5;
+                addScore = 0;
+                subBossHp = 0;
+                break;
+            case 1:
+                isScrollStop = false;
+                if (zanki < 5)
+                {
+                    zanki = 5;
+                }
+                addScore = 0;
+                subBossHp = 0;
+                break;
+        }
     }
 
     //ゲームオーバー・クリアパネルのボタン切替処理
