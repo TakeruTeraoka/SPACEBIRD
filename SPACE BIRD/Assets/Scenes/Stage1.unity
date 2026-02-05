@@ -3357,17 +3357,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 647007627}
     m_Modifications:
-    - target: {fileID: 879916635915728661, guid: ded69b004888aa241a99baa0a56f82ef, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2343060091440040334, guid: ded69b004888aa241a99baa0a56f82ef, type: 3}
       propertyPath: m_Name
       value: GreenElement
-      objectReference: {fileID: 0}
-    - target: {fileID: 3135956359455563433, guid: ded69b004888aa241a99baa0a56f82ef, type: 3}
-      propertyPath: boundPower
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8914136584180177879, guid: ded69b004888aa241a99baa0a56f82ef, type: 3}
       propertyPath: m_LocalPosition.x
